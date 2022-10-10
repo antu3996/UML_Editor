@@ -15,15 +15,20 @@ namespace UML_Editor_Nguyen
     public partial class Class_Description_Form : Form
     {
         public UML_Class_Description newDescription { get; set; }
+        public BindingList<Class_Property> properties { get; set; }
+        public BindingList<Class_Method> methods { get; set; }
         public Class_Description_Form(UML_Class_Description newDescription)
         {
             InitializeComponent();
 
+            this.properties = new BindingList<Class_Property>(new List<Class_Property>(newDescription.Properties));
+            this.methods = new BindingList<Class_Method>(new List<Class_Method>(newDescription.Methods));
+
             this.newDescription = newDescription;
             this.txt_ClassName.Text = newDescription.ClassName;
             this.txt_Specification.Text = newDescription.Specification;
-            this.list_Methods.DataSource = newDescription.Methods;
-            this.list_Properties.DataSource = newDescription.Properties;
+            this.list_Methods.DataSource = this.methods;
+            this.list_Properties.DataSource = this.properties;
         }
 
         private void txt_Specification_Validating(object sender, CancelEventArgs e)
@@ -66,7 +71,7 @@ namespace UML_Editor_Nguyen
 
             if (frm_Method.ShowDialog() == DialogResult.OK)
             {
-                this.newDescription.Methods.Add(frm_Method.newMethod);
+                this.methods.Add(frm_Method.newMethod);
             }
         }
 
@@ -75,7 +80,7 @@ namespace UML_Editor_Nguyen
             int currentIndex = this.list_Methods.SelectedIndex;
             if (currentIndex > -1)
             {
-                this.newDescription.Methods.RemoveAt(currentIndex);
+                this.methods.RemoveAt(currentIndex);
             }
         }
 
@@ -84,17 +89,18 @@ namespace UML_Editor_Nguyen
             int currentIndex = this.list_Methods.SelectedIndex;
             if (currentIndex > -1)
             {
-                Class_Method selected = this.newDescription.Methods[currentIndex];
+                Class_Method selected = this.methods[currentIndex];
                 Class_Method_Form edit_Method = new Class_Method_Form(selected);
 
-                if(edit_Method.ShowDialog() == DialogResult.OK)
+                edit_Method.ShowDialog();
+                /*if(edit_Method.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Pozor", "Upraveno");
-                }
+                }*/
             }
 
             this.list_Methods.DataSource = null;
-            this.list_Methods.DataSource = this.newDescription.Methods;
+            this.list_Methods.DataSource = this.methods;
         }
 
         private void btn_Prop_Add_Click(object sender, EventArgs e)
@@ -103,7 +109,7 @@ namespace UML_Editor_Nguyen
 
             if (frm_Attrib.ShowDialog() == DialogResult.OK)
             {
-                this.newDescription.Properties.Add(frm_Attrib.newProperty);
+                this.properties.Add(frm_Attrib.newProperty);
             }
 
 
@@ -114,27 +120,28 @@ namespace UML_Editor_Nguyen
             int currentIndex = this.list_Properties.SelectedIndex;
             if (currentIndex > -1)
             {
-                this.newDescription.Properties.RemoveAt(currentIndex);
+                this.properties.RemoveAt(currentIndex);
             }
 
         }
 
         private void btn_Prop_Edit_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.list_Methods.SelectedIndex;
+            int currentIndex = this.list_Properties.SelectedIndex;
             if (currentIndex > -1)
             {
-                Class_Property selected = this.newDescription.Properties[currentIndex];
+                Class_Property selected = this.properties[currentIndex];
                 Class_Attribute_Form edit_Property = new Class_Attribute_Form(selected);
 
-                if (edit_Property.ShowDialog() == DialogResult.OK)
+                edit_Property.ShowDialog();
+                /*if (edit_Property.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Pozor", "Upraveno");
-                }
+                }*/
             }
 
             this.list_Properties.DataSource = null;
-            this.list_Properties.DataSource = this.newDescription.Properties;
+            this.list_Properties.DataSource = this.properties;
 
         }
 
@@ -150,6 +157,8 @@ namespace UML_Editor_Nguyen
             {
                 this.newDescription.ClassName = this.txt_ClassName.Text;
                 this.newDescription.Specification = this.txt_Specification.Text;
+                this.newDescription.Methods = this.methods.ToList();
+                this.newDescription.Properties = this.properties.ToList();
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

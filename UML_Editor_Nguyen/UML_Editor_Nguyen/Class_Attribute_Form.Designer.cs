@@ -60,7 +60,7 @@
             this.btn_Confirm.Name = "btn_Confirm";
             this.btn_Confirm.Size = new System.Drawing.Size(75, 23);
             this.btn_Confirm.TabIndex = 16;
-            this.btn_Confirm.Text = "Přidat";
+            this.btn_Confirm.Text = "Uložit";
             this.btn_Confirm.UseVisualStyleBackColor = true;
             this.btn_Confirm.Click += new System.EventHandler(this.btn_Confirm_Click);
             // 

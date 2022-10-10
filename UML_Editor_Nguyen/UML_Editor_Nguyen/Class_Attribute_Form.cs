@@ -28,11 +28,11 @@ namespace UML_Editor_Nguyen
             {
                 this.rdb_public.Checked = true;
             }
-            if (property.Modifier == "private")
+            else if (property.Modifier == "private")
             {
                 this.rdb_private.Checked = true;
             }
-            if (property.Modifier == "protected")
+            else if (property.Modifier == "protected")
             {
                 this.rdb_protected.Checked = true;
             }

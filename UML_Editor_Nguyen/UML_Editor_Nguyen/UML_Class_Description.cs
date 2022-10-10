@@ -12,8 +12,8 @@ namespace UML_Editor_Nguyen
     {
         public string ClassName { get; set; } = "";
         public string Specification { get; set; } = "";
-        public BindingList<Class_Property> Properties { get; set; } = new BindingList<Class_Property>();
-        public BindingList<Class_Method> Methods { get; set; } = new BindingList<Class_Method>();
+        public List<Class_Property> Properties { get; set; } = new List<Class_Property>();
+        public List<Class_Method> Methods { get; set; } = new List<Class_Method>();
         public UML_Class_Object parent_rect { get; set; }
 
         private Font font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold);
