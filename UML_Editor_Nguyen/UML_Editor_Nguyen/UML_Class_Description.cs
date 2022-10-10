@@ -93,10 +93,7 @@ namespace UML_Editor_Nguyen
         {
             Class_Description_Form frm_Description = new Class_Description_Form(this);
 
-            if (frm_Description.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("Upraveno");
-            }
+            frm_Description.ShowDialog();
         }
         private SizeF DrawInCenter(float y_draw, Graphics g, string s)
         {

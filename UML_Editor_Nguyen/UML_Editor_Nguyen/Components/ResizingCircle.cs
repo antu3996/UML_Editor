@@ -16,7 +16,7 @@ namespace UML_Editor_Nguyen.Components
         public Point Drag_Point { get; set; }
         public bool IsSelected { get; set; } = false;
 
-        public ResizingCircle(int x, int y, int radius = 6)
+        public ResizingCircle(int x, int y, int radius = 10)
         {
             this.X = x;
             this.Y = y;
@@ -26,7 +26,7 @@ namespace UML_Editor_Nguyen.Components
         public void Draw(Graphics g)
         {
             int diameter = this.Radius * 2;
-            Brush b = this.IsSelected ? Brushes.White : Brushes.Gray;
+            Brush b = this.IsSelected ? Brushes.White : Brushes.MediumSlateBlue;
             Pen p = new Pen(Color.Black, 2f);
             g.FillEllipse(b, this.X - this.Radius, this.Y - this.Radius, diameter, diameter);
             g.DrawEllipse(p, this.X - this.Radius - p.Width / 2, this.Y - this.Radius - p.Width / 2,
