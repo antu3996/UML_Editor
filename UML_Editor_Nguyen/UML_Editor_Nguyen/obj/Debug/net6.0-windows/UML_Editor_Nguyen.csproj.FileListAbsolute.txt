@@ -15,3 +15,23 @@ X:\4. ročník\ZPR a PRG\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-wi
 X:\4. ročník\ZPR a PRG\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.pdb
 X:\4. ročník\ZPR a PRG\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.genruntimeconfig.cache
 X:\4. ročník\ZPR a PRG\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\ref\UML_Editor_Nguyen.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\UML_Editor_Nguyen.exe
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\UML_Editor_Nguyen.deps.json
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\UML_Editor_Nguyen.runtimeconfig.json
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\UML_Editor_Nguyen.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\UML_Editor_Nguyen.pdb
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.csproj.AssemblyReference.cache
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.csproj.GenerateResource.cache
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.AssemblyInfoInputs.cache
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.AssemblyInfo.cs
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.csproj.CoreCompileInputs.cache
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\refint\UML_Editor_Nguyen.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.pdb
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.genruntimeconfig.cache
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\ref\UML_Editor_Nguyen.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Class_Description_Form.resources
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Class_Attribute_Form.resources
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Class_Method_Form.resources
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Form_Editor.resources

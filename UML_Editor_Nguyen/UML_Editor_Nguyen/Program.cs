@@ -1,3 +1,5 @@
+using UML_Editor_Nguyen.Description_Components;
+
 namespace UML_Editor_Nguyen
 {
     internal static class Program
@@ -11,7 +13,9 @@ namespace UML_Editor_Nguyen
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+
+            Application.Run(new Form_Editor());
         }
     }
 }
