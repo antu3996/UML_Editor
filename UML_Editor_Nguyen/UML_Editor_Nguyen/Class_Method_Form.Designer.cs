@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_MethodName = new System.Windows.Forms.TextBox();
-            this.txt_Parameters = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chck_ReturnVoid = new System.Windows.Forms.CheckBox();
             this.txt_ReturnType = new System.Windows.Forms.TextBox();
@@ -43,6 +42,13 @@
             this.rdb_protected = new System.Windows.Forms.RadioButton();
             this.rdb_public = new System.Windows.Forms.RadioButton();
             this.rdb_private = new System.Windows.Forms.RadioButton();
+            this.list_Parameters = new System.Windows.Forms.ListBox();
+            this.btn_DeleteParameter = new System.Windows.Forms.Button();
+            this.btn_AddParameter = new System.Windows.Forms.Button();
+            this.txt_ParameterName = new System.Windows.Forms.TextBox();
+            this.txt_ParamDataType = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,14 +71,6 @@
             this.txt_MethodName.TabIndex = 1;
             this.txt_MethodName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_MethodName_Validating);
             // 
-            // txt_Parameters
-            // 
-            this.txt_Parameters.Location = new System.Drawing.Point(104, 56);
-            this.txt_Parameters.Name = "txt_Parameters";
-            this.txt_Parameters.Size = new System.Drawing.Size(313, 23);
-            this.txt_Parameters.TabIndex = 2;
-            this.txt_Parameters.Validating += new System.ComponentModel.CancelEventHandler(this.txt_Parameters_Validating);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -87,7 +85,7 @@
             // 
             this.chck_ReturnVoid.AutoSize = true;
             this.chck_ReturnVoid.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.chck_ReturnVoid.Location = new System.Drawing.Point(367, 97);
+            this.chck_ReturnVoid.Location = new System.Drawing.Point(408, 341);
             this.chck_ReturnVoid.Name = "chck_ReturnVoid";
             this.chck_ReturnVoid.Size = new System.Drawing.Size(50, 19);
             this.chck_ReturnVoid.TabIndex = 4;
@@ -97,9 +95,9 @@
             // 
             // txt_ReturnType
             // 
-            this.txt_ReturnType.Location = new System.Drawing.Point(104, 93);
+            this.txt_ReturnType.Location = new System.Drawing.Point(104, 339);
             this.txt_ReturnType.Name = "txt_ReturnType";
-            this.txt_ReturnType.Size = new System.Drawing.Size(233, 23);
+            this.txt_ReturnType.Size = new System.Drawing.Size(274, 23);
             this.txt_ReturnType.TabIndex = 5;
             this.txt_ReturnType.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ReturnType_Validating);
             // 
@@ -107,7 +105,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(12, 96);
+            this.label3.Location = new System.Drawing.Point(12, 342);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 15);
             this.label3.TabIndex = 6;
@@ -116,7 +114,7 @@
             // btn_Confirm
             // 
             this.btn_Confirm.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Confirm.Location = new System.Drawing.Point(342, 213);
+            this.btn_Confirm.Location = new System.Drawing.Point(676, 465);
             this.btn_Confirm.Name = "btn_Confirm";
             this.btn_Confirm.Size = new System.Drawing.Size(75, 23);
             this.btn_Confirm.TabIndex = 7;
@@ -127,7 +125,7 @@
             // btn_Cancel
             // 
             this.btn_Cancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Cancel.Location = new System.Drawing.Point(261, 213);
+            this.btn_Cancel.Location = new System.Drawing.Point(595, 465);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancel.TabIndex = 8;
@@ -146,9 +144,9 @@
             this.groupBox1.Controls.Add(this.rdb_public);
             this.groupBox1.Controls.Add(this.rdb_private);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(12, 131);
+            this.groupBox1.Location = new System.Drawing.Point(13, 383);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(414, 43);
+            this.groupBox1.Size = new System.Drawing.Size(445, 43);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modifikátory přístupu:";
@@ -186,12 +184,82 @@
             this.rdb_private.Text = "private";
             this.rdb_private.UseVisualStyleBackColor = true;
             // 
+            // list_Parameters
+            // 
+            this.list_Parameters.FormattingEnabled = true;
+            this.list_Parameters.ItemHeight = 15;
+            this.list_Parameters.Location = new System.Drawing.Point(104, 59);
+            this.list_Parameters.Name = "list_Parameters";
+            this.list_Parameters.Size = new System.Drawing.Size(543, 184);
+            this.list_Parameters.TabIndex = 21;
+            // 
+            // btn_DeleteParameter
+            // 
+            this.btn_DeleteParameter.Location = new System.Drawing.Point(653, 59);
+            this.btn_DeleteParameter.Name = "btn_DeleteParameter";
+            this.btn_DeleteParameter.Size = new System.Drawing.Size(98, 23);
+            this.btn_DeleteParameter.TabIndex = 22;
+            this.btn_DeleteParameter.Text = "Smazat";
+            this.btn_DeleteParameter.UseVisualStyleBackColor = true;
+            this.btn_DeleteParameter.Click += new System.EventHandler(this.btn_DeleteParameter_Click);
+            // 
+            // btn_AddParameter
+            // 
+            this.btn_AddParameter.Location = new System.Drawing.Point(653, 258);
+            this.btn_AddParameter.Name = "btn_AddParameter";
+            this.btn_AddParameter.Size = new System.Drawing.Size(98, 23);
+            this.btn_AddParameter.TabIndex = 23;
+            this.btn_AddParameter.Text = "Přidat";
+            this.btn_AddParameter.UseVisualStyleBackColor = true;
+            this.btn_AddParameter.Click += new System.EventHandler(this.btn_AddParameter_Click);
+            // 
+            // txt_ParameterName
+            // 
+            this.txt_ParameterName.Location = new System.Drawing.Point(210, 259);
+            this.txt_ParameterName.Name = "txt_ParameterName";
+            this.txt_ParameterName.Size = new System.Drawing.Size(127, 23);
+            this.txt_ParameterName.TabIndex = 24;
+            this.txt_ParameterName.Validating += new System.ComponentModel.CancelEventHandler(this.textBox1_Validating);
+            // 
+            // txt_ParamDataType
+            // 
+            this.txt_ParamDataType.Location = new System.Drawing.Point(460, 259);
+            this.txt_ParamDataType.Name = "txt_ParamDataType";
+            this.txt_ParamDataType.Size = new System.Drawing.Size(127, 23);
+            this.txt_ParamDataType.TabIndex = 25;
+            this.txt_ParamDataType.Validating += new System.ComponentModel.CancelEventHandler(this.textBox2_Validating);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(104, 262);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 15);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Název parametru:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(387, 262);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 15);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Datový typ:";
+            // 
             // Class_Method_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(444, 248);
+            this.ClientSize = new System.Drawing.Size(763, 500);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txt_ParamDataType);
+            this.Controls.Add(this.txt_ParameterName);
+            this.Controls.Add(this.btn_AddParameter);
+            this.Controls.Add(this.btn_DeleteParameter);
+            this.Controls.Add(this.list_Parameters);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Confirm);
@@ -199,7 +267,6 @@
             this.Controls.Add(this.txt_ReturnType);
             this.Controls.Add(this.chck_ReturnVoid);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_Parameters);
             this.Controls.Add(this.txt_MethodName);
             this.Controls.Add(this.label1);
             this.Name = "Class_Method_Form";
@@ -216,7 +283,6 @@
 
         private Label label1;
         private TextBox txt_MethodName;
-        private TextBox txt_Parameters;
         private Label label2;
         private CheckBox chck_ReturnVoid;
         private TextBox txt_ReturnType;
@@ -228,5 +294,12 @@
         private RadioButton rdb_protected;
         private RadioButton rdb_public;
         private RadioButton rdb_private;
+        private Label label5;
+        private Label label4;
+        private TextBox txt_ParamDataType;
+        private TextBox txt_ParameterName;
+        private Button btn_AddParameter;
+        private Button btn_DeleteParameter;
+        private ListBox list_Parameters;
     }
 }

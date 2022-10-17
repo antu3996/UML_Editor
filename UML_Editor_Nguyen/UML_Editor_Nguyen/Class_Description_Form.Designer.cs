@@ -36,7 +36,7 @@
             this.btn_Method_Add = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.txt_ClassName = new System.Windows.Forms.TextBox();
-            this.txt_Specification = new System.Windows.Forms.TextBox();
+            this.txt_Stereotype = new System.Windows.Forms.TextBox();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.btn_Edit = new System.Windows.Forms.Button();
             this.btn_Method_Delete = new System.Windows.Forms.Button();
@@ -54,9 +54,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 15);
+            this.label1.Size = new System.Drawing.Size(116, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Specifikace (volitelné):";
+            this.label1.Text = "Stereotyp (volitelné):";
             // 
             // label2
             // 
@@ -110,13 +110,13 @@
             this.txt_ClassName.TabIndex = 8;
             this.txt_ClassName.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ClassName_Validating);
             // 
-            // txt_Specification
+            // txt_Stereotype
             // 
-            this.txt_Specification.Location = new System.Drawing.Point(155, 16);
-            this.txt_Specification.Name = "txt_Specification";
-            this.txt_Specification.Size = new System.Drawing.Size(311, 23);
-            this.txt_Specification.TabIndex = 9;
-            this.txt_Specification.Validating += new System.ComponentModel.CancelEventHandler(this.txt_Specification_Validating);
+            this.txt_Stereotype.Location = new System.Drawing.Point(155, 16);
+            this.txt_Stereotype.Name = "txt_Stereotype";
+            this.txt_Stereotype.Size = new System.Drawing.Size(311, 23);
+            this.txt_Stereotype.TabIndex = 9;
+            this.txt_Stereotype.Validating += new System.ComponentModel.CancelEventHandler(this.txt_Specification_Validating);
             // 
             // btn_Cancel
             // 
@@ -226,7 +226,7 @@
             this.Controls.Add(this.btn_Method_Delete);
             this.Controls.Add(this.btn_Edit);
             this.Controls.Add(this.btn_Cancel);
-            this.Controls.Add(this.txt_Specification);
+            this.Controls.Add(this.txt_Stereotype);
             this.Controls.Add(this.txt_ClassName);
             this.Controls.Add(this.btn_Method_Add);
             this.Controls.Add(this.list_Properties);
@@ -249,7 +249,7 @@
         private ListBox list_Properties;
         private Button btn_Method_Add;
         private ErrorProvider errorProvider1;
-        private TextBox txt_Specification;
+        private TextBox txt_Stereotype;
         private TextBox txt_ClassName;
         private Button btn_Edit;
         private Button btn_Cancel;

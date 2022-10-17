@@ -14,6 +14,7 @@ namespace UML_Editor_Nguyen
 {
     public partial class Class_Attribute_Form : Form
     {
+        public Func<string, bool> PropExists { get; set; }
         public Class_Property newProperty { get; set; }
         public Class_Attribute_Form(Class_Property property)
         {
@@ -59,6 +60,15 @@ namespace UML_Editor_Nguyen
                 this.errorProvider1.SetError(textBox, "Pouze písmena");
 
                 e.Cancel = true;
+            }
+            else
+            {
+                if (this.PropExists(textBox.Text) && this.newProperty.PropertyName != textBox.Text)
+                {
+                    this.errorProvider1.SetError(textBox, "Název už existuje");
+
+                    e.Cancel = true;
+                }
             }
         }
 

@@ -26,7 +26,7 @@ namespace UML_Editor_Nguyen
 
             this.newDescription = newDescription;
             this.txt_ClassName.Text = newDescription.ClassName;
-            this.txt_Specification.Text = newDescription.Specification;
+            this.txt_Stereotype.Text = newDescription.Stereotype;
             this.list_Methods.DataSource = this.methods;
             this.list_Properties.DataSource = this.properties;
         }
@@ -106,6 +106,7 @@ namespace UML_Editor_Nguyen
         private void btn_Prop_Add_Click(object sender, EventArgs e)
         {
             Class_Attribute_Form frm_Attrib = new Class_Attribute_Form(new Class_Property());
+            frm_Attrib.PropExists += this.PropExists;
 
             if (frm_Attrib.ShowDialog() == DialogResult.OK)
             {
@@ -132,6 +133,7 @@ namespace UML_Editor_Nguyen
             {
                 Class_Property selected = this.properties[currentIndex];
                 Class_Attribute_Form edit_Property = new Class_Attribute_Form(selected);
+                edit_Property.PropExists += this.PropExists;
 
                 edit_Property.ShowDialog();
                 /*if (edit_Property.ShowDialog() == DialogResult.OK)
@@ -156,13 +158,25 @@ namespace UML_Editor_Nguyen
             if (this.ValidateChildren())
             {
                 this.newDescription.ClassName = this.txt_ClassName.Text;
-                this.newDescription.Specification = this.txt_Specification.Text;
+                this.newDescription.Stereotype = this.txt_Stereotype.Text;
                 this.newDescription.Methods = this.methods.ToList();
                 this.newDescription.Properties = this.properties.ToList();
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private bool PropExists(string propname)
+        {
+            foreach (Class_Property item in this.properties)
+            {
+                if (propname == item.PropertyName)
+                {
+                    return true;
+                } 
+            }
+            return false;
         }
     }
 }

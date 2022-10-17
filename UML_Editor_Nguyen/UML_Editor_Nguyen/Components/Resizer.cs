@@ -9,25 +9,25 @@ namespace UML_Editor_Nguyen.Components
 {
     public class Resizer
     {
-        public ResizingCircle TopLeft { get; set; }
-        public ResizingCircle TopRight { get; set; }
-        public ResizingCircle BottomLeft { get; set; }
-        public ResizingCircle BottomRight { get; set; }
+        public Circle TopLeft { get; set; }
+        public Circle TopRight { get; set; }
+        public Circle BottomLeft { get; set; }
+        public Circle BottomRight { get; set; }
 
         public int LeftToRight_Distance { get; set; }
         public int TopToBottom_Distance { get; set; }
 
-        public ResizingCircle SelectedCircle { get; set; }
+        public Circle SelectedCircle { get; set; }
 
         public UML_Class_Object parent_rect { get; set; }
 
         public Resizer(UML_Class_Object rect)
         {
             this.parent_rect = rect;
-            this.TopLeft = new ResizingCircle(rect.X, rect.Y);
-            this.TopRight = new ResizingCircle(rect.X + rect.Width, rect.Y);
-            this.BottomLeft = new ResizingCircle(rect.X, rect.Y + rect.Height);
-            this.BottomRight = new ResizingCircle(rect.X + rect.Width, rect.Y + rect.Height);
+            this.TopLeft = new Circle(rect.X, rect.Y);
+            this.TopRight = new Circle(rect.X + rect.Width, rect.Y);
+            this.BottomLeft = new Circle(rect.X, rect.Y + rect.Height);
+            this.BottomRight = new Circle(rect.X + rect.Width, rect.Y + rect.Height);
 
             this.LeftToRight_Distance = rect.MinWidth;
             this.TopToBottom_Distance = rect.MinHeight;

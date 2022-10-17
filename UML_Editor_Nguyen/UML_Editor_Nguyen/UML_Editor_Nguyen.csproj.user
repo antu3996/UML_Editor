@@ -13,5 +13,8 @@
     <Compile Update="Form_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form_Relationship.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

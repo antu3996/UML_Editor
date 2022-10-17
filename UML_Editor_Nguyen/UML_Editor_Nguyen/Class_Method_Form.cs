@@ -15,13 +15,18 @@ namespace UML_Editor_Nguyen
     public partial class Class_Method_Form : Form
     {
         public Class_Method newMethod { get; set; }
+        public BindingList<Method_Parameter> newParemeters { get; set; }
         public Class_Method_Form(Class_Method newMethod)
         {
             InitializeComponent();
 
+            this.newParemeters = new BindingList<Method_Parameter>(new List<Method_Parameter>(newMethod.Parameters));
+
             this.newMethod = newMethod;
             this.txt_MethodName.Text = newMethod.MethodName;
-            this.txt_Parameters.Text = newMethod.Parameters;
+            //this.txt_Parameters.Text = newMethod.Parameters;
+            //this.grid_Parameters.DataSource = this.newParemeters;
+            this.list_Parameters.DataSource = this.newParemeters;
 
             if (newMethod.ReturnType == "void")
             {
@@ -112,7 +117,8 @@ namespace UML_Editor_Nguyen
             if (this.ValidateChildren())
             {
                 this.newMethod.MethodName = this.txt_MethodName.Text;
-                this.newMethod.Parameters = this.txt_Parameters.Text;
+                //this.newMethod.Parameters = this.txt_Parameters.Text;
+                this.newMethod.Parameters = this.newParemeters.ToList();
 
                 if (this.chck_ReturnVoid.Checked)
                 {
@@ -153,6 +159,83 @@ namespace UML_Editor_Nguyen
             {
                 this.errorProvider1.SetError(this.txt_ReturnType, null);
                 this.txt_ReturnType.Clear();
+            }
+        }
+
+        private void btn_AddParameter_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.txt_ParameterName.Text))
+            {
+                this.errorProvider1.SetError(this.txt_ParameterName, "Název a parametry nesmějí být prázdné");
+            }
+            else if (string.IsNullOrEmpty(this.txt_ParamDataType.Text))
+            {
+                this.errorProvider1.SetError(this.txt_ParamDataType, "Název a parametry nesmějí být prázdné");
+            }
+            else
+            {
+                if (this.errorProvider1.GetError(this.txt_ParameterName) == String.Empty
+                && this.errorProvider1.GetError(this.txt_ParamDataType) == String.Empty)
+                {
+                    this.newParemeters.Add(new Method_Parameter()
+                    { ParameterName = this.txt_ParameterName.Text, DataType = this.txt_ParamDataType.Text });
+
+                    this.list_Parameters.DataSource = null;
+                    this.list_Parameters.DataSource = this.newParemeters;
+
+                    this.txt_ParameterName.Clear();
+                    this.txt_ParamDataType.Clear();
+                }
+            }
+        }
+
+        private void btn_DeleteParameter_Click(object sender, EventArgs e)
+        {
+            int index = this.list_Parameters.SelectedIndex;
+            if (index > -1)
+            {
+                this.newParemeters.RemoveAt(index);
+            }
+        }
+
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            this.errorProvider1.SetError(textBox, null);
+
+            if (!string.IsNullOrEmpty(textBox.Text) && !Regex.IsMatch(textBox.Text, "^[a-zA-Z_0-9]+$"))
+            {
+                this.errorProvider1.SetError(textBox, "Pouze písmena");
+
+                e.Cancel = true;
+            }
+            else
+            {
+                foreach (Method_Parameter item in this.newParemeters)
+                {
+                    if (item.ParameterName == textBox.Text)
+                    {
+                        this.errorProvider1.SetError(textBox, "Název už existuje");
+                        e.Cancel = true;
+                        break;
+                    }
+                }
+            }
+            
+        }
+
+        private void textBox2_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            this.errorProvider1.SetError(textBox, null);
+
+            if (!string.IsNullOrEmpty(textBox.Text) && !Regex.IsMatch(textBox.Text, "^[a-zA-Z_0-9]+$"))
+            {
+                this.errorProvider1.SetError(textBox, "Pouze písmena");
+
+                e.Cancel = true;
             }
         }
     }

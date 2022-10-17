@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 using UML_Editor_Nguyen.Components;
+using UML_Editor_Nguyen.Description_Components;
+using UML_Editor_Nguyen.Relationship_Components;
 
 namespace UML_Editor_Nguyen
 {
@@ -22,6 +25,11 @@ namespace UML_Editor_Nguyen
         public Resizer Resizer_Component { get; set; }
         public UML_Class_Description Description_Component { get; set; }
 
+
+        public bool IsInBindingMode { get; set; } = false;
+        public Class_Binder Binder_Component { get; set; }
+        
+        
         public UML_Class_Object(int x, int y, int width, int height)
         {
             this.X = x;
@@ -30,21 +38,34 @@ namespace UML_Editor_Nguyen
             this.Height = height > this.MinHeight ? height : this.MinHeight;
             this.Resizer_Component = new Resizer(this);
             this.Description_Component = new UML_Class_Description(this);
+
+            this.Binder_Component = new Class_Binder(this);
         }
         public void Draw(Graphics g)
         {
+            //Must be first to recalculate size for description
+            this.Description_Component.RecalculateParentArea(g);
+            this.Resizer_Component.Refresh();
+
             Pen p = new Pen(Color.Black, 2f);
             Brush b = Brushes.CornflowerBlue;
 
             g.DrawRectangle(p, this.X, this.Y, this.Width, this.Height);
             g.FillRectangle(b, this.X + p.Width / 2, this.Y + p.Width / 2, this.Width - p.Width, this.Height - p.Width);
 
+
             this.Description_Component.Draw(g);
 
-            if (this.IsSelected)
+            if (!this.IsInBindingMode)
             {
-                this.Resizer_Component.Draw(g);
-
+                if (this.IsSelected)
+                {
+                    this.Resizer_Component.Draw(g);
+                }
+            }
+            else
+            {
+                this.Binder_Component.Draw(g);
             }
         }
 
@@ -114,6 +135,8 @@ namespace UML_Editor_Nguyen
                     this.Y = mouseY - distanceY;
 
                     this.Resizer_Component.Refresh();
+
+                    this.Binder_Component.Refresh();
                 }
             }
         }

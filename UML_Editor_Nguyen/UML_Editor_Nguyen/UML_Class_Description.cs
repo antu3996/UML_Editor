@@ -11,7 +11,7 @@ namespace UML_Editor_Nguyen
     public class UML_Class_Description
     {
         public string ClassName { get; set; } = "";
-        public string Specification { get; set; } = "";
+        public string Stereotype { get; set; } = "";
         public List<Class_Property> Properties { get; set; } = new List<Class_Property>();
         public List<Class_Method> Methods { get; set; } = new List<Class_Method>();
         public UML_Class_Object parent_rect { get; set; }
@@ -26,44 +26,46 @@ namespace UML_Editor_Nguyen
 
         public void Draw(Graphics g)
         {
+
             float parent_x = this.parent_rect.X;
-            float parent_y = this.parent_rect.Y;
             int parent_width = this.parent_rect.Width;
-            int parent_height = this.parent_rect.Height;
 
             float x_DrawPos = this.parent_rect.X + 3;
             float y_DrawPos = this.parent_rect.Y + 2;
 
-            if (!string.IsNullOrEmpty(this.Specification))
+
+            if (!string.IsNullOrEmpty(this.Stereotype))
             {
-                y_DrawPos += this.DrawInCenter(y_DrawPos, g, $"<<{this.Specification}>>").Height + 1;
+                SizeF stereotype = g.MeasureString($"<<{this.Stereotype}>>", this.font);
+
+                g.DrawString($"<<{this.Stereotype}>>", this.font, this.fontColor,
+                    (parent_width - stereotype.Width) / 2 + parent_x, 
+                    y_DrawPos);
+
+                y_DrawPos += stereotype.Height + 1;
+
             }
 
-            y_DrawPos += this.DrawInCenter(y_DrawPos, g, $"{this.ClassName}").Height + 1;
+            SizeF classname = g.MeasureString($"{this.ClassName}", this.font);
+
+            g.DrawString($"{this.ClassName}", this.font, this.fontColor,
+                (parent_width - classname.Width) / 2 + parent_x,
+                y_DrawPos);
+
+            y_DrawPos += classname.Height + 1;
+
 
             g.DrawLine(Pens.Black, parent_x, y_DrawPos, parent_x + parent_width,  y_DrawPos);
 
             y_DrawPos += 1;
-            if (y_DrawPos >= parent_y + parent_height) return;
 
             foreach (Class_Property item in this.Properties)
             {
                 string currentString = item.ToString();
                 SizeF currentSize = g.MeasureString(currentString, this.font);
-
-                if (currentSize.Width >= parent_width)
-                {
-                    int shortenedLength = Convert.ToInt32(Math.Floor(currentString.Length * (parent_width / currentSize.Width)));
-                    g.DrawString(currentString.Substring(0, shortenedLength), this.font, this.fontColor, x_DrawPos, y_DrawPos);
-                }
-                else
-                {
-                    g.DrawString(currentString, this.font, this.fontColor, x_DrawPos, y_DrawPos);
-
-                }
+                g.DrawString(currentString, this.font, this.fontColor, x_DrawPos, y_DrawPos);
 
                 y_DrawPos += currentSize.Height + 1;
-                if (y_DrawPos >= parent_y + parent_height) return;
             }
 
             g.DrawLine(Pens.Black, parent_x, y_DrawPos, parent_x + parent_width, y_DrawPos);
@@ -72,20 +74,9 @@ namespace UML_Editor_Nguyen
             {
                 string currentString = item.ToString();
                 SizeF currentSize = g.MeasureString(currentString, this.font);
-
-                if (currentSize.Width >= parent_width)
-                {
-                    int shortenedLength = Convert.ToInt32(Math.Floor(currentString.Length * (parent_width / currentSize.Width)));
-                    g.DrawString(currentString.Substring(0, shortenedLength), this.font, this.fontColor, x_DrawPos, y_DrawPos);
-                }
-                else
-                {
-                    g.DrawString(currentString, this.font, this.fontColor, x_DrawPos, y_DrawPos);
-
-                }
+                g.DrawString(currentString, this.font, this.fontColor, x_DrawPos, y_DrawPos);
 
                 y_DrawPos += currentSize.Height + 1;
-                if (y_DrawPos >= parent_y + parent_height) return;
             }
         }
 
@@ -105,6 +96,95 @@ namespace UML_Editor_Nguyen
 
             return size;
 
+        }
+
+        public void RecalculateParentArea(Graphics g)
+        {
+            float parent_x = this.parent_rect.X;
+            float parent_y = this.parent_rect.Y;
+            int parent_width = this.parent_rect.Width;
+            int parent_height = this.parent_rect.Height;
+
+            float x_DrawPos = this.parent_rect.X + 3;
+            float y_DrawPos = this.parent_rect.Y + 2;
+
+
+            if (!string.IsNullOrEmpty(this.Stereotype))
+            {
+                SizeF stereotype = g.MeasureString($"<<{this.Stereotype}>>", this.font);
+
+                if (stereotype.Width >= parent_width)
+                {
+                    parent_width = Convert.ToInt32(stereotype.Width + 2);
+                }
+
+                y_DrawPos += stereotype.Height + 1;
+                if (y_DrawPos >= parent_y + parent_height)
+                {
+                    parent_height = Convert.ToInt32(y_DrawPos - parent_y);
+                }
+
+            }
+
+            SizeF classname = g.MeasureString($"{this.ClassName}", this.font);
+
+            if (classname.Width >= parent_width)
+            {
+                parent_width = Convert.ToInt32(classname.Width + 2);
+            }
+
+            y_DrawPos += classname.Height + 1;
+            if (y_DrawPos >= parent_y + parent_height)
+            {
+                parent_height = Convert.ToInt32(y_DrawPos - parent_y);
+            }
+
+            //-----------------line
+
+            y_DrawPos += 1;
+            if (y_DrawPos >= parent_y + parent_height)
+            {
+                parent_height = Convert.ToInt32(y_DrawPos - parent_y);
+            }
+
+            foreach (Class_Property item in this.Properties)
+            {
+                string currentString = item.ToString();
+                SizeF currentSize = g.MeasureString(currentString, this.font);
+
+                if (x_DrawPos + currentSize.Width >= parent_x + parent_width)
+                {
+                    parent_width = Convert.ToInt32(x_DrawPos + currentSize.Width - parent_x);
+                }
+
+                y_DrawPos += currentSize.Height + 1;
+                if (y_DrawPos >= parent_y + parent_height)
+                {
+                    parent_height = Convert.ToInt32(y_DrawPos - parent_y);
+                }
+            }
+
+            //--------------line
+
+            foreach (Class_Method item in this.Methods)
+            {
+                string currentString = item.ToString();
+                SizeF currentSize = g.MeasureString(currentString, this.font);
+
+                if (x_DrawPos + currentSize.Width >= parent_x + parent_width)
+                {
+                    parent_width = Convert.ToInt32(x_DrawPos + currentSize.Width - parent_x);
+                }
+
+                y_DrawPos += currentSize.Height + 1;
+                if (y_DrawPos >= parent_y + parent_height)
+                {
+                    parent_height = Convert.ToInt32(y_DrawPos - parent_y);
+                }
+            }
+
+            this.parent_rect.Width = parent_width;
+            this.parent_rect.Height = parent_height;
         }
     }
 }

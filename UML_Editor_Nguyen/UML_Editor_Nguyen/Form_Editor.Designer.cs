@@ -31,6 +31,7 @@
             this.editor_Box = new System.Windows.Forms.PictureBox();
             this.btn_Add = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
+            this.chck_ToggleRelCreation = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.editor_Box)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,11 +69,23 @@
             this.btn_Delete.UseVisualStyleBackColor = true;
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
+            // chck_ToggleRelCreation
+            // 
+            this.chck_ToggleRelCreation.AutoSize = true;
+            this.chck_ToggleRelCreation.Location = new System.Drawing.Point(208, 576);
+            this.chck_ToggleRelCreation.Name = "chck_ToggleRelCreation";
+            this.chck_ToggleRelCreation.Size = new System.Drawing.Size(108, 19);
+            this.chck_ToggleRelCreation.TabIndex = 3;
+            this.chck_ToggleRelCreation.Text = "Vytváření vazeb";
+            this.chck_ToggleRelCreation.UseVisualStyleBackColor = true;
+            this.chck_ToggleRelCreation.CheckedChanged += new System.EventHandler(this.chck_ToggleRelCreation_CheckedChanged);
+            // 
             // Form_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 608);
+            this.Controls.Add(this.chck_ToggleRelCreation);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.btn_Add);
             this.Controls.Add(this.editor_Box);
@@ -80,6 +93,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.editor_Box)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -88,5 +102,6 @@
         private PictureBox editor_Box;
         private Button btn_Add;
         private Button btn_Delete;
+        private CheckBox chck_ToggleRelCreation;
     }
 }

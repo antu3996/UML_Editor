@@ -35,3 +35,4 @@ C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Class_Attribute_Form.resources
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Class_Method_Form.resources
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Form_Editor.resources
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Form_Relationship.resources

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UML_Editor_Nguyen.Components
 {
-    public class ResizingCircle
+    public class Circle
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -16,7 +16,7 @@ namespace UML_Editor_Nguyen.Components
         public Point Drag_Point { get; set; }
         public bool IsSelected { get; set; } = false;
 
-        public ResizingCircle(int x, int y, int radius = 10)
+        public Circle(int x, int y, int radius = 10)
         {
             this.X = x;
             this.Y = y;
@@ -75,7 +75,7 @@ namespace UML_Editor_Nguyen.Components
             return false;
         }
 
-        public void Refresh(int newX, int newY)
+        public virtual void Refresh(int newX, int newY)
         {
             this.X = newX;
             this.Y = newY;
