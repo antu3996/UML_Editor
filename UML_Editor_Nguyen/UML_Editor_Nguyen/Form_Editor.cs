@@ -357,6 +357,7 @@ namespace UML_Editor_Nguyen
         {
             if (this.chck_ToggleRelCreation.Checked)
             {
+                this.btn_Add.Enabled = false;
                 this.IsCreatingRelationshipMode = true;
                 if (this.selectedClass != null)
                 {

@@ -37,6 +37,9 @@
             // 
             // editor_Box
             // 
+            this.editor_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.editor_Box.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.editor_Box.Location = new System.Drawing.Point(12, 12);
             this.editor_Box.Name = "editor_Box";
@@ -51,6 +54,7 @@
             // 
             // btn_Add
             // 
+            this.btn_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_Add.Location = new System.Drawing.Point(12, 573);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(75, 23);
@@ -61,6 +65,7 @@
             // 
             // btn_Delete
             // 
+            this.btn_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_Delete.Location = new System.Drawing.Point(104, 573);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(75, 23);
@@ -71,12 +76,13 @@
             // 
             // chck_ToggleRelCreation
             // 
+            this.chck_ToggleRelCreation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chck_ToggleRelCreation.AutoSize = true;
-            this.chck_ToggleRelCreation.Location = new System.Drawing.Point(208, 576);
+            this.chck_ToggleRelCreation.Location = new System.Drawing.Point(996, 577);
             this.chck_ToggleRelCreation.Name = "chck_ToggleRelCreation";
-            this.chck_ToggleRelCreation.Size = new System.Drawing.Size(108, 19);
+            this.chck_ToggleRelCreation.Size = new System.Drawing.Size(149, 19);
             this.chck_ToggleRelCreation.TabIndex = 3;
-            this.chck_ToggleRelCreation.Text = "Vytváření vazeb";
+            this.chck_ToggleRelCreation.Text = "Vytváření/úprava vazeb";
             this.chck_ToggleRelCreation.UseVisualStyleBackColor = true;
             this.chck_ToggleRelCreation.CheckedChanged += new System.EventHandler(this.chck_ToggleRelCreation_CheckedChanged);
             // 
