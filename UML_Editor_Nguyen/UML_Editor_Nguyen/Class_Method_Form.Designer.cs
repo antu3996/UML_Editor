@@ -46,9 +46,9 @@
             this.btn_DeleteParameter = new System.Windows.Forms.Button();
             this.btn_AddParameter = new System.Windows.Forms.Button();
             this.txt_ParameterName = new System.Windows.Forms.TextBox();
-            this.txt_ParamDataType = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.cb_ParamDataType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -221,14 +221,6 @@
             this.txt_ParameterName.TabIndex = 24;
             this.txt_ParameterName.Validating += new System.ComponentModel.CancelEventHandler(this.textBox1_Validating);
             // 
-            // txt_ParamDataType
-            // 
-            this.txt_ParamDataType.Location = new System.Drawing.Point(460, 259);
-            this.txt_ParamDataType.Name = "txt_ParamDataType";
-            this.txt_ParamDataType.Size = new System.Drawing.Size(127, 23);
-            this.txt_ParamDataType.TabIndex = 25;
-            this.txt_ParamDataType.Validating += new System.ComponentModel.CancelEventHandler(this.textBox2_Validating);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -247,15 +239,24 @@
             this.label5.TabIndex = 27;
             this.label5.Text = "Datový typ:";
             // 
+            // cb_ParamDataType
+            // 
+            this.cb_ParamDataType.FormattingEnabled = true;
+            this.cb_ParamDataType.Location = new System.Drawing.Point(460, 259);
+            this.cb_ParamDataType.Name = "cb_ParamDataType";
+            this.cb_ParamDataType.Size = new System.Drawing.Size(135, 23);
+            this.cb_ParamDataType.TabIndex = 28;
+            this.cb_ParamDataType.Validating += new System.ComponentModel.CancelEventHandler(this.cb_ParamDataType_Validating);
+            // 
             // Class_Method_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(763, 500);
+            this.Controls.Add(this.cb_ParamDataType);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txt_ParamDataType);
             this.Controls.Add(this.txt_ParameterName);
             this.Controls.Add(this.btn_AddParameter);
             this.Controls.Add(this.btn_DeleteParameter);
@@ -296,10 +297,10 @@
         private RadioButton rdb_private;
         private Label label5;
         private Label label4;
-        private TextBox txt_ParamDataType;
         private TextBox txt_ParameterName;
         private Button btn_AddParameter;
         private Button btn_DeleteParameter;
         private ListBox list_Parameters;
+        private ComboBox cb_ParamDataType;
     }
 }

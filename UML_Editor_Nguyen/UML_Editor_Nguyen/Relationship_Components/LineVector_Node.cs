@@ -14,6 +14,8 @@ namespace UML_Editor_Nguyen.Relationship_Components
         public LineVector_Node Previous { get; set; }
         public LineVector_Node Next { get; set; }
 
+        public int Vector_Index { get; set; }
+
         public LineVector Current_Object { get; set; }
 
         public LineVector_Node AddAndGetLast(LineVector vect)
@@ -49,6 +51,25 @@ namespace UML_Editor_Nguyen.Relationship_Components
             if (this.Next != null)
             {
                 this.Next.Draw(g, lineType);
+            }
+        }
+
+        public LineVector_Node GetNextUntilIndex(int index)
+        {
+            if (this.Vector_Index == index)
+            {
+                return this;
+            }
+            else
+            {
+                if (this.Next != null)
+                {
+                    return this.Next.GetNextUntilIndex(index);
+                }
+                else
+                {
+                    return this;
+                }
             }
         }
 

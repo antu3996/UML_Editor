@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+lQmum3U+MOyTtTk0u/0XEzn74Agw9lDSN+zplvKddu5qgXWmI7fLbMvA3MEwE1mdTzYq+wPTYzhA9f4WF1WrA==",
+  "dgSpecHash": "ssH7eqE68WzoyBQiTDmo/weo3zSscGLT+5gkyXnGeWbT/O255gpWdAmKRUY2OYal0wcVg/CQ6Kug0ePe/FNDgA==",
   "success": true,
   "projectFilePath": "C:\\Users\\sokol\\Desktop\\repos\\UML_Editor_Nguyen\\UML_Editor_Nguyen\\UML_Editor_Nguyen.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\sokol\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\sokol\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\sokol\\.nuget\\packages\\system.text.json\\6.0.6\\system.text.json.6.0.6.nupkg.sha512"
+  ],
   "logs": []
 }

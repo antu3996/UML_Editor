@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Editor_Nguyen.Description_Components;
+using UML_Editor_Nguyen.Services;
 
 namespace UML_Editor_Nguyen
 {
@@ -21,9 +22,11 @@ namespace UML_Editor_Nguyen
             InitializeComponent();
 
             this.newProperty = property;
-
             this.txt_PropertyName.Text = property.PropertyName;
-            this.txt_DataType.Text = property.DataType;
+
+            this.cb_DataType.DataSource = new List<DataType>(DataTypeStorage.Instance.GetData());
+            this.cb_DataType.Text = property.DataType;
+
 
             if (property.Modifier == "public")
             {
@@ -72,25 +75,6 @@ namespace UML_Editor_Nguyen
             }
         }
 
-        private void txt_DataType_Validating(object sender, CancelEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            this.errorProvider1.SetError(textBox, null);
-
-            if (string.IsNullOrEmpty(textBox.Text))
-            {
-                this.errorProvider1.SetError(textBox, "Pole nesmí být prázdné");
-
-                e.Cancel = true;
-            }
-            else if (!Regex.IsMatch(textBox.Text, "^[a-zA-Z_0-9<>]+$"))
-            {
-                this.errorProvider1.SetError(textBox, "Pouze písmena");
-
-                e.Cancel = true;
-            }
-        }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
@@ -103,7 +87,7 @@ namespace UML_Editor_Nguyen
             if (this.ValidateChildren())
             {
                 this.newProperty.PropertyName = this.txt_PropertyName.Text;
-                this.newProperty.DataType = this.txt_DataType.Text;
+                this.newProperty.DataType = this.cb_DataType.Text;
                 
                 if (this.rdb_public.Checked)
                 {
@@ -120,6 +104,18 @@ namespace UML_Editor_Nguyen
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+        }
+
+        private void cb_DataType_Validating(object sender, CancelEventArgs e)
+        {
+            this.errorProvider1.SetError(this.cb_DataType, null);
+
+            if (this.cb_DataType.SelectedIndex == -1)
+            {
+                this.errorProvider1.SetError(this.cb_DataType, "Datový typ nesmí být prázdný nebo nepatřící do seznamu");
+
+                e.Cancel = true;
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using UML_Editor_Nguyen.Components;
@@ -19,14 +19,15 @@ namespace UML_Editor_Nguyen
         public int MinWidth { get; set; } = 150;
         public int MinHeight { get; set; } = 75;
         public int Layer_Index { get; set; } = 1;
+
         public Point Initial_Point { get; set; }
+
         public Point Drag_Point { get; set; }
+
         public bool IsSelected { get; set; } = false;
+
         public Resizer Resizer_Component { get; set; }
         public UML_Class_Description Description_Component { get; set; }
-
-
-        public bool IsInBindingMode { get; set; } = false;
         public Class_Binder Binder_Component { get; set; }
         
         
@@ -38,14 +39,18 @@ namespace UML_Editor_Nguyen
             this.Height = height > this.MinHeight ? height : this.MinHeight;
             this.Resizer_Component = new Resizer(this);
             this.Description_Component = new UML_Class_Description(this);
-
             this.Binder_Component = new Class_Binder(this);
         }
         public void Draw(Graphics g)
         {
             //Must be first to recalculate size for description
-            this.Description_Component.RecalculateParentArea(g);
-            this.Resizer_Component.Refresh();
+            if (this.Description_Component.ParentNeedsUpdate)
+            {
+                this.Description_Component.RecalculateParentArea(g);
+                this.Binder_Component.Refresh(null);
+                this.Resizer_Component.Refresh();
+            }
+            
 
             Pen p = new Pen(Color.Black, 2f);
             Brush b = Brushes.CornflowerBlue;
@@ -56,16 +61,9 @@ namespace UML_Editor_Nguyen
 
             this.Description_Component.Draw(g);
 
-            if (!this.IsInBindingMode)
+            if (this.IsSelected)
             {
-                if (this.IsSelected)
-                {
-                    this.Resizer_Component.Draw(g);
-                }
-            }
-            else
-            {
-                this.Binder_Component.Draw(g);
+                this.Resizer_Component.Draw(g);
             }
         }
 
@@ -134,9 +132,11 @@ namespace UML_Editor_Nguyen
                     this.X = mouseX - distanceX;
                     this.Y = mouseY - distanceY;
 
+
+                    this.Binder_Component.Refresh(null);
+
                     this.Resizer_Component.Refresh();
 
-                    this.Binder_Component.Refresh();
                 }
             }
         }
@@ -205,6 +205,8 @@ namespace UML_Editor_Nguyen
             this.Height = newHeight;
             this.Initial_Point = default;
             this.Drag_Point = default;
+
+            this.Binder_Component.Refresh(null);
         }
     }
 }

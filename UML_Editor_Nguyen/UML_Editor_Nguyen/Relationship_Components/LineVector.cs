@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UML_Editor_Nguyen.Relationship_Components.LineTypes;
 using static System.Windows.Forms.AxHost;
@@ -14,6 +15,7 @@ namespace UML_Editor_Nguyen.Relationship_Components
         public Point StartPoint { get; set; }
         public Point EndPoint { get; set; }
         public bool IsLocked { get; set; } = false;
+
         public bool IsSelected { get; set; } = false;
 
         public int I_X { get; set; }
@@ -44,8 +46,41 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
             /*g.DrawLine(p, this.StartPoint, this.EndPoint);*/
 
-
             lineType.DrawLine(g, p, this.StartPoint.X, this.StartPoint.Y, this.EndPoint.X, this.EndPoint.Y);
+        }
+
+        public void DrawStringAroundVector(Graphics g, string str)
+        {
+            Font font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold);
+            SizeF size = g.MeasureString(str, font);
+
+
+            if (this.Direction == 1 || this.Direction == 3)
+            {
+                if (this.StartPoint.Y < this.EndPoint.Y)
+                {
+                    g.DrawString(str, font, Brushes.Black, this.StartPoint.X - size.Width - 2, this.StartPoint.Y 
+                        + (this.EndPoint.Y - this.StartPoint.Y - size.Height) / 2);
+                }
+                else
+                {
+                    g.DrawString(str, font, Brushes.Black, this.StartPoint.X - size.Width - 2, this.EndPoint.Y
+                        + (this.StartPoint.Y - this.EndPoint.Y - size.Height) / 2);
+                }
+            }
+            if (this.Direction == 2 || this.Direction == 4)
+            {
+                if (this.StartPoint.X < this.EndPoint.X)
+                {
+                    g.DrawString(str, font, Brushes.Black, this.StartPoint.X
+                        + (this.EndPoint.X - this.StartPoint.X - size.Width) / 2, this.StartPoint.Y - size.Height - 2);
+                }
+                else
+                {
+                    g.DrawString(str, font, Brushes.Black, this.EndPoint.X
+                        + (this.StartPoint.X - this.EndPoint.X - size.Width) / 2, this.StartPoint.Y - size.Height - 2);
+                }
+            }
         }
 
         private void SetDirection()

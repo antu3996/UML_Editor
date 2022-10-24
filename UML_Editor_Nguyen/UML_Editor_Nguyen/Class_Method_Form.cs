@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Editor_Nguyen.Description_Components;
+using UML_Editor_Nguyen.Services;
 
 namespace UML_Editor_Nguyen
 {
@@ -27,6 +28,7 @@ namespace UML_Editor_Nguyen
             //this.txt_Parameters.Text = newMethod.Parameters;
             //this.grid_Parameters.DataSource = this.newParemeters;
             this.list_Parameters.DataSource = this.newParemeters;
+            this.cb_ParamDataType.DataSource = new List<DataType>(DataTypeStorage.Instance.GetData());
 
             if (newMethod.ReturnType == "void")
             {
@@ -75,19 +77,7 @@ namespace UML_Editor_Nguyen
             }
         }
 
-        private void txt_Parameters_Validating(object sender, CancelEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            this.errorProvider1.SetError(textBox, null);
-
-            if (!string.IsNullOrEmpty(textBox.Text) && !Regex.IsMatch(textBox.Text, "^(([a-zA-Z_0-9<>]+): ([a-zA-Z_0-9<>]+), )*(([a-zA-Z_0-9<>]+): ([a-zA-Z_0-9<>]+))$"))
-            {
-                this.errorProvider1.SetError(textBox, "Pouze písmena ve formátu - nazevPromenne: datovyTyp, nazevPromenne2: datovyTyp2");
-
-                e.Cancel = true;
-            }
-        }
+        
 
         private void txt_ReturnType_Validating(object sender, CancelEventArgs e)
         {
@@ -166,25 +156,24 @@ namespace UML_Editor_Nguyen
         {
             if (string.IsNullOrEmpty(this.txt_ParameterName.Text))
             {
-                this.errorProvider1.SetError(this.txt_ParameterName, "Název a parametry nesmějí být prázdné");
+                this.errorProvider1.SetError(this.txt_ParameterName, "Název nesmí být prázdný");
             }
-            else if (string.IsNullOrEmpty(this.txt_ParamDataType.Text))
+            else if (this.cb_ParamDataType.SelectedIndex == -1)
             {
-                this.errorProvider1.SetError(this.txt_ParamDataType, "Název a parametry nesmějí být prázdné");
+                this.errorProvider1.SetError(this.cb_ParamDataType, "Datový typ nesmí být prázdný nebo nepatřící do seznamu");
             }
             else
             {
                 if (this.errorProvider1.GetError(this.txt_ParameterName) == String.Empty
-                && this.errorProvider1.GetError(this.txt_ParamDataType) == String.Empty)
+                && this.errorProvider1.GetError(this.cb_ParamDataType) == String.Empty)
                 {
                     this.newParemeters.Add(new Method_Parameter()
-                    { ParameterName = this.txt_ParameterName.Text, DataType = this.txt_ParamDataType.Text });
+                    { ParameterName = this.txt_ParameterName.Text, DataType = this.cb_ParamDataType.Text });
 
                     this.list_Parameters.DataSource = null;
                     this.list_Parameters.DataSource = this.newParemeters;
 
                     this.txt_ParameterName.Clear();
-                    this.txt_ParamDataType.Clear();
                 }
             }
         }
@@ -225,15 +214,13 @@ namespace UML_Editor_Nguyen
             
         }
 
-        private void textBox2_Validating(object sender, CancelEventArgs e)
+        private void cb_ParamDataType_Validating(object sender, CancelEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
+            this.errorProvider1.SetError(this.cb_ParamDataType, null);
 
-            this.errorProvider1.SetError(textBox, null);
-
-            if (!string.IsNullOrEmpty(textBox.Text) && !Regex.IsMatch(textBox.Text, "^[a-zA-Z_0-9]+$"))
+            if (this.cb_ParamDataType.SelectedIndex == -1)
             {
-                this.errorProvider1.SetError(textBox, "Pouze písmena");
+                this.errorProvider1.SetError(this.cb_ParamDataType, "Pole nesmí být prázdné");
 
                 e.Cancel = true;
             }

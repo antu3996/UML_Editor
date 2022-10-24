@@ -15,7 +15,7 @@ namespace UML_Editor_Nguyen
             ApplicationConfiguration.Initialize();
 
 
-            Application.Run(new Form_Editor());
+            Application.Run(new Form_Initializer());
         }
     }
 }

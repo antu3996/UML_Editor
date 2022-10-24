@@ -10,7 +10,19 @@
     <Compile Update="Class_Method_Form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form_DataTypeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form_DataTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Form_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form_Exporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form_Initializer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form_Relationship.cs">

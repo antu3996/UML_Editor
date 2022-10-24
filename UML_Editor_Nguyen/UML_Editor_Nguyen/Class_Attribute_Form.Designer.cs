@@ -32,7 +32,6 @@
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.btn_Confirm = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txt_DataType = new System.Windows.Forms.TextBox();
             this.txt_PropertyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -40,6 +39,7 @@
             this.rdb_protected = new System.Windows.Forms.RadioButton();
             this.rdb_public = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cb_DataType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,14 +73,6 @@
             this.label3.Size = new System.Drawing.Size(71, 15);
             this.label3.TabIndex = 15;
             this.label3.Text = "Datový typ:";
-            // 
-            // txt_DataType
-            // 
-            this.txt_DataType.Location = new System.Drawing.Point(113, 61);
-            this.txt_DataType.Name = "txt_DataType";
-            this.txt_DataType.Size = new System.Drawing.Size(313, 23);
-            this.txt_DataType.TabIndex = 14;
-            this.txt_DataType.Validating += new System.ComponentModel.CancelEventHandler(this.txt_DataType_Validating);
             // 
             // txt_PropertyName
             // 
@@ -151,17 +143,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modifikátory přístupu:";
             // 
+            // cb_DataType
+            // 
+            this.cb_DataType.FormattingEnabled = true;
+            this.cb_DataType.Location = new System.Drawing.Point(113, 61);
+            this.cb_DataType.Name = "cb_DataType";
+            this.cb_DataType.Size = new System.Drawing.Size(157, 23);
+            this.cb_DataType.TabIndex = 20;
+            this.cb_DataType.Validating += new System.ComponentModel.CancelEventHandler(this.cb_DataType_Validating);
+            // 
             // Class_Attribute_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(444, 204);
+            this.Controls.Add(this.cb_DataType);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Confirm);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txt_DataType);
             this.Controls.Add(this.txt_PropertyName);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -180,7 +181,6 @@
         private Button btn_Cancel;
         private Button btn_Confirm;
         private Label label3;
-        private TextBox txt_DataType;
         private TextBox txt_PropertyName;
         private Label label1;
         private ErrorProvider errorProvider1;
@@ -188,5 +188,6 @@
         private RadioButton rdb_protected;
         private RadioButton rdb_public;
         private RadioButton rdb_private;
+        private ComboBox cb_DataType;
     }
 }

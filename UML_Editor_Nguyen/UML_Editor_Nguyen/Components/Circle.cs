@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace UML_Editor_Nguyen.Components
@@ -14,6 +15,7 @@ namespace UML_Editor_Nguyen.Components
         public int Radius { get; set; }
         public Point Initial_Point { get; set; }
         public Point Drag_Point { get; set; }
+
         public bool IsSelected { get; set; } = false;
 
         public Circle(int x, int y, int radius = 10)

@@ -31,47 +31,25 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
             if (startDirection == 1)
             {
-                if (!string.IsNullOrEmpty(this.Stereotype))
-                {
-                    g.DrawString($"<<{this.Stereotype}>>",
-                    font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y - 25);
-                }
                 g.DrawString($"{this.Multiplicity1}",
-                font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y - 5);
+                font, Brushes.Black, parent_rel.StartPoint.X + 25, parent_rel.StartPoint.Y - 25);
             }
             if (startDirection == 2)
             {
-                if (!string.IsNullOrEmpty(this.Stereotype))
-                {
-                    g.DrawString($"<<{this.Stereotype}>>",
-                    font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y - 10);
-                }
                 g.DrawString($"{this.Multiplicity1}",
-                font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y + 10);
+                font, Brushes.Black, parent_rel.StartPoint.X + 25, parent_rel.StartPoint.Y + 15);
             }
             if (startDirection == 3)
             {
-                if (!string.IsNullOrEmpty(this.Stereotype))
-                {
-                    g.DrawString($"<<{this.Stereotype}>>",
-                    font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y + 5);
-                }
                 g.DrawString($"{this.Multiplicity1}",
-                font, Brushes.Black, parent_rel.StartPoint.X + 5, parent_rel.StartPoint.Y + 25);
+                font, Brushes.Black, parent_rel.StartPoint.X + 25, parent_rel.StartPoint.Y + 15);
             }
             if (startDirection == 4)
             {
-                if (!string.IsNullOrEmpty(this.Stereotype))
-                {
-                    SizeF size = g.MeasureString($"<<{this.Stereotype}>>",
-                    font);
-                    g.DrawString($"<<{this.Stereotype}>>",
-                    font, Brushes.Black, parent_rel.StartPoint.X - size.Width, parent_rel.StartPoint.Y - 10);
-                }
                 SizeF size2  = g.MeasureString($"{this.Multiplicity1}",
                     font);
                 g.DrawString($"{this.Multiplicity1}",
-                font, Brushes.Black, parent_rel.StartPoint.X - size2.Width, parent_rel.StartPoint.Y + 10);
+                font, Brushes.Black, parent_rel.StartPoint.X - size2.Width - 25, parent_rel.StartPoint.Y + 25);
             }
 
             
@@ -81,26 +59,31 @@ namespace UML_Editor_Nguyen.Relationship_Components
             if (endDirection == 1)
             {
                 g.DrawString($"{this.Multiplicity2}",
-                font, Brushes.Black, parent_rel.EndPoint.X + 5, parent_rel.EndPoint.Y - 5);
+                font, Brushes.Black, parent_rel.EndPoint.X + 25, parent_rel.EndPoint.Y + 25);
             }
             if (endDirection == 2)
-            {
-                g.DrawString($"{this.Multiplicity2}",
-                font, Brushes.Black, parent_rel.EndPoint.X + 5, parent_rel.EndPoint.Y - 5);
-            }
-            if (endDirection == 3)
-            {
-                g.DrawString($"{this.Multiplicity2}",
-                font, Brushes.Black, parent_rel.EndPoint.X + 5, parent_rel.EndPoint.Y + 5);
-            }
-            if (endDirection == 4)
             {
                 SizeF size2 = g.MeasureString($"{this.Multiplicity2}",
                     font);
                 g.DrawString($"{this.Multiplicity2}",
-                font, Brushes.Black, parent_rel.EndPoint.X - size2.Width, parent_rel.EndPoint.Y - 5);
+                font, Brushes.Black, parent_rel.EndPoint.X - size2.Width - 25, parent_rel.EndPoint.Y - 25);
+            }
+            if (endDirection == 3)
+            {
+                g.DrawString($"{this.Multiplicity2}",
+                font, Brushes.Black, parent_rel.EndPoint.X - 25, parent_rel.EndPoint.Y - 25);
+            }
+            if (endDirection == 4)
+            {
+                
+                g.DrawString($"{this.Multiplicity2}",
+                font, Brushes.Black, parent_rel.EndPoint.X + 25, parent_rel.EndPoint.Y - 25);
             }
 
+            if (!string.IsNullOrEmpty(this.Stereotype))
+            {
+                this.parent_rel.Vectors.MiddleVector.Current_Object.DrawStringAroundVector(g, $"<<{this.Stereotype}>>");
+            }
         }
 
         public void OpenForm()
