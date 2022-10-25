@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using UML_Editor_Nguyen.Components;
@@ -12,6 +12,7 @@ namespace UML_Editor_Nguyen
 {
     public class UML_Class_Object
     {
+        public int ID { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }
@@ -26,6 +27,7 @@ namespace UML_Editor_Nguyen
 
         public bool IsSelected { get; set; } = false;
 
+        [JsonIgnore]
         public Resizer Resizer_Component { get; set; }
         public UML_Class_Description Description_Component { get; set; }
         public Class_Binder Binder_Component { get; set; }
@@ -39,16 +41,17 @@ namespace UML_Editor_Nguyen
             this.Height = height > this.MinHeight ? height : this.MinHeight;
             this.Resizer_Component = new Resizer(this);
             this.Description_Component = new UML_Class_Description(this);
-            this.Binder_Component = new Class_Binder(this);
+            this.Binder_Component = new Class_Binder();
         }
+
         public void Draw(Graphics g)
         {
             //Must be first to recalculate size for description
             if (this.Description_Component.ParentNeedsUpdate)
             {
                 this.Description_Component.RecalculateParentArea(g);
-                this.Binder_Component.Refresh(null);
-                this.Resizer_Component.Refresh();
+                this.Binder_Component.Refresh(this);
+                this.Resizer_Component.Refresh(this);
             }
             
 
@@ -122,7 +125,7 @@ namespace UML_Editor_Nguyen
             {
                 if (this.Resizer_Component.SelectedCircle != null)
                 {
-                    this.Resizer_Component.MouseDrag(mouseX, mouseY);
+                    this.Resizer_Component.MouseDrag(this, mouseX, mouseY);
                 }
                 else
                 {
@@ -133,9 +136,9 @@ namespace UML_Editor_Nguyen
                     this.Y = mouseY - distanceY;
 
 
-                    this.Binder_Component.Refresh(null);
+                    this.Binder_Component.Refresh(this);
 
-                    this.Resizer_Component.Refresh();
+                    this.Resizer_Component.Refresh(this);
 
                 }
             }
@@ -206,7 +209,22 @@ namespace UML_Editor_Nguyen
             this.Initial_Point = default;
             this.Drag_Point = default;
 
-            this.Binder_Component.Refresh(null);
+            this.Binder_Component.Refresh(this);
+        }
+
+        public void ImportData(UML_Class_Object other)
+        {
+            this.ID = other.ID;
+            this.X = other.X;
+            this.Y = other.Y;
+            this.MinHeight = other.MinHeight;
+            this.MinWidth = other.MinWidth;
+            this.Width = other.Width;
+            this.Height = other.Height;
+            this.Layer_Index = other.Layer_Index;
+            this.Description_Component.ImportData(other.Description_Component);
+            this.Binder_Component.ImportData(other.Binder_Component);
+            this.Resizer_Component = new Resizer(this);
         }
     }
 }

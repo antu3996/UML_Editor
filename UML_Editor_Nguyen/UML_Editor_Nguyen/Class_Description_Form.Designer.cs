@@ -46,6 +46,7 @@
             this.btn_Prop_Add = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.chck_IsInterface = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(21, 58);
+            this.label2.Location = new System.Drawing.Point(21, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 1;
@@ -104,7 +105,7 @@
             // 
             // txt_ClassName
             // 
-            this.txt_ClassName.Location = new System.Drawing.Point(96, 55);
+            this.txt_ClassName.Location = new System.Drawing.Point(96, 68);
             this.txt_ClassName.Name = "txt_ClassName";
             this.txt_ClassName.Size = new System.Drawing.Size(370, 23);
             this.txt_ClassName.TabIndex = 8;
@@ -211,12 +212,24 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Seznam vlastností:";
             // 
+            // chck_IsInterface
+            // 
+            this.chck_IsInterface.AutoSize = true;
+            this.chck_IsInterface.Location = new System.Drawing.Point(394, 45);
+            this.chck_IsInterface.Name = "chck_IsInterface";
+            this.chck_IsInterface.Size = new System.Drawing.Size(72, 19);
+            this.chck_IsInterface.TabIndex = 19;
+            this.chck_IsInterface.Text = "Interface";
+            this.chck_IsInterface.UseVisualStyleBackColor = true;
+            this.chck_IsInterface.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Class_Description_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(505, 561);
+            this.Controls.Add(this.chck_IsInterface);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_Prop_Edit);
@@ -260,5 +273,6 @@
         private Button btn_Method_Delete;
         private Label label4;
         private Label label3;
+        private CheckBox chck_IsInterface;
     }
 }

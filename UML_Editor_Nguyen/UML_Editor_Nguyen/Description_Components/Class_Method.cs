@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UML_Editor_Nguyen.Services;
 
 namespace UML_Editor_Nguyen.Description_Components
 {
@@ -10,8 +11,9 @@ namespace UML_Editor_Nguyen.Description_Components
     {
         public string MethodName { get; set; }
         public List<Method_Parameter> Parameters { get; set; } = new List<Method_Parameter>();
-        public string ReturnType { get; set; }
+        public DataType ReturnType { get; set; }
         public string Modifier { get; set; }
+        public bool IsVoid { get; set; }
 
         public override string ToString()
         {
@@ -28,7 +30,8 @@ namespace UML_Editor_Nguyen.Description_Components
             {
                 sb.Append("#");
             }
-            sb.Append($"{this.MethodName}({this.GetParametersString()}): {this.ReturnType}");
+            string rtrnType = this.IsVoid ? "void" : this.ReturnType.Name;
+            sb.Append($"{this.MethodName}({this.GetParametersString()}): {rtrnType}");
             
             return sb.ToString();
         }
@@ -72,5 +75,19 @@ namespace UML_Editor_Nguyen.Description_Components
                 return false;
             }
         }
+
+        public void ImportData(Class_Method other)
+        {
+            this.MethodName = other.MethodName;
+            for (int i = 0; i < other.Parameters.Count; i++)
+            {
+                Method_Parameter newPara = new Method_Parameter();
+                newPara.ImportData(other.Parameters[i]);
+                this.Parameters.Add(newPara);
+            }
+            this.ReturnType = other.ReturnType;
+            this.Modifier = other.Modifier;
+            this.IsVoid = other.IsVoid;
+    }
     }
 }

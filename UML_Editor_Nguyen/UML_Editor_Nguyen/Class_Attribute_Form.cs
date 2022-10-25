@@ -25,7 +25,7 @@ namespace UML_Editor_Nguyen
             this.txt_PropertyName.Text = property.PropertyName;
 
             this.cb_DataType.DataSource = new List<DataType>(DataTypeStorage.Instance.GetData());
-            this.cb_DataType.Text = property.DataType;
+            this.cb_DataType.SelectedItem = property.DataType;
 
 
             if (property.Modifier == "public")
@@ -87,7 +87,7 @@ namespace UML_Editor_Nguyen
             if (this.ValidateChildren())
             {
                 this.newProperty.PropertyName = this.txt_PropertyName.Text;
-                this.newProperty.DataType = this.cb_DataType.Text;
+                this.newProperty.DataType = this.cb_DataType.SelectedItem as DataType;
                 
                 if (this.rdb_public.Checked)
                 {

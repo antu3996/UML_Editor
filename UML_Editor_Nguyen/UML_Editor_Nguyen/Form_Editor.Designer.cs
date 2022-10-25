@@ -143,6 +143,7 @@
             this.Controls.Add(this.editor_Box);
             this.Name = "Form_Editor";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Editor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.editor_Box)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

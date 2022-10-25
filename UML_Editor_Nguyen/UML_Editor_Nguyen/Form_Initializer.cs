@@ -37,10 +37,9 @@ namespace UML_Editor_Nguyen
                 Form_Editor main_form = new Form_Editor(currentData.EngineData);
 
                 this.Hide();
-                if (main_form.ShowDialog() == DialogResult.OK)
+                if (main_form.ShowDialog() == DialogResult.Cancel)
                 {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    this.Show();
                 }
             }
         }
@@ -52,10 +51,9 @@ namespace UML_Editor_Nguyen
             Form_Editor main_form = new Form_Editor(null);
 
             this.Hide();
-            if (main_form.ShowDialog() == DialogResult.OK)
+            if (main_form.ShowDialog() == DialogResult.Cancel)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.Show();
             }
         }
     }

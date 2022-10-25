@@ -16,11 +16,8 @@ namespace UML_Editor_Nguyen.Components
 
         public Circle SelectedCircle { get; set; }
 
-        public UML_Class_Object parent_rect { get; set; }
-
         public Resizer(UML_Class_Object rect)
         {
-            this.parent_rect = rect;
             this.TopLeft = new Circle(rect.X, rect.Y);
             this.TopRight = new Circle(rect.X + rect.Width, rect.Y);
             this.BottomLeft = new Circle(rect.X, rect.Y + rect.Height);
@@ -69,7 +66,7 @@ namespace UML_Editor_Nguyen.Components
             this.SelectedCircle = null;
         }
 
-        public void MouseDrag(int mouseX, int mouseY)
+        public void MouseDrag(UML_Class_Object caller, int mouseX, int mouseY)
         {
             if (this.SelectedCircle != null)
             {
@@ -80,8 +77,8 @@ namespace UML_Editor_Nguyen.Components
                     int newWidth = this.TopRight.X - this.TopLeft.X;
                     int newHeight = this.BottomLeft.Y - this.TopLeft.Y;
                     
-                    this.SelectedCircle.Refresh(this.TopRight.X - Math.Max(newWidth, this.parent_rect.MinWidth),
-                        this.BottomLeft.Y - Math.Max(newHeight, this.parent_rect.MinHeight));
+                    this.SelectedCircle.Refresh(this.TopRight.X - Math.Max(newWidth, caller.MinWidth),
+                        this.BottomLeft.Y - Math.Max(newHeight, caller.MinHeight));
 
                     this.TopRight.FullRefresh(this.TopRight.X, this.TopLeft.Y);
                     this.BottomLeft.FullRefresh(this.TopLeft.X, this.BottomLeft.Y);
@@ -93,8 +90,8 @@ namespace UML_Editor_Nguyen.Components
                     int newWidth = this.TopRight.X - this.TopLeft.X;
                     int newHeight = this.BottomRight.Y - this.TopRight.Y;
 
-                    this.SelectedCircle.Refresh(this.TopLeft.X + Math.Max(newWidth, this.parent_rect.MinWidth),
-                        this.BottomRight.Y - Math.Max(newHeight, this.parent_rect.MinHeight));
+                    this.SelectedCircle.Refresh(this.TopLeft.X + Math.Max(newWidth, caller.MinWidth),
+                        this.BottomRight.Y - Math.Max(newHeight, caller.MinHeight));
 
                     this.TopLeft.FullRefresh(this.TopLeft.X, this.TopRight.Y);
                     this.BottomRight.FullRefresh(this.TopRight.X, this.BottomRight.Y);
@@ -105,8 +102,8 @@ namespace UML_Editor_Nguyen.Components
                     int newWidth = this.BottomRight.X - this.BottomLeft.X;
                     int newHeight = this.BottomLeft.Y - this.TopLeft.Y;
 
-                    this.SelectedCircle.Refresh(this.BottomRight.X - Math.Max(newWidth, this.parent_rect.MinWidth),
-                        this.TopLeft.Y + Math.Max(newHeight, this.parent_rect.MinHeight));
+                    this.SelectedCircle.Refresh(this.BottomRight.X - Math.Max(newWidth, caller.MinWidth),
+                        this.TopLeft.Y + Math.Max(newHeight, caller.MinHeight));
 
                     this.TopLeft.Refresh(this.BottomLeft.X, this.TopLeft.Y);
                     this.BottomRight.Refresh(this.BottomRight.X, this.BottomLeft.Y);
@@ -116,15 +113,15 @@ namespace UML_Editor_Nguyen.Components
                     int newWidth = this.BottomRight.X - this.BottomLeft.X;
                     int newHeight = this.BottomRight.Y - this.TopRight.Y;
 
-                    this.SelectedCircle.Refresh(this.BottomLeft.X + Math.Max(newWidth, this.parent_rect.MinWidth),
-                        this.TopRight.Y + Math.Max(newHeight, this.parent_rect.MinHeight));
+                    this.SelectedCircle.Refresh(this.BottomLeft.X + Math.Max(newWidth, caller.MinWidth),
+                        this.TopRight.Y + Math.Max(newHeight, caller.MinHeight));
 
                     this.TopRight.Refresh(this.BottomRight.X, this.TopRight.Y);
                     this.BottomLeft.Refresh(this.BottomLeft.X, this.BottomRight.Y);
                   
                 }
 
-                this.parent_rect.RefreshOrigin(this.TopLeft.X, this.TopLeft.Y, this.TopRight.X - this.TopLeft.X, this.BottomLeft.Y - this.TopLeft.Y);
+                caller.RefreshOrigin(this.TopLeft.X, this.TopLeft.Y, this.TopRight.X - this.TopLeft.X, this.BottomLeft.Y - this.TopLeft.Y);
 
             }
         }
@@ -135,12 +132,20 @@ namespace UML_Editor_Nguyen.Components
                 || this.BottomLeft.IsMouseInArea(mouseX, mouseY) || this.BottomRight.IsMouseInArea(mouseX, mouseY);
         }
 
-        public void Refresh()
+        public void Refresh(UML_Class_Object caller)
         {
-            this.TopLeft.FullRefresh(this.parent_rect.X, this.parent_rect.Y);
-            this.TopRight.FullRefresh(this.parent_rect.X + this.parent_rect.Width, this.parent_rect.Y);
-            this.BottomLeft.FullRefresh(this.parent_rect.X, this.parent_rect.Y + this.parent_rect.Height);
-            this.BottomRight.FullRefresh(this.parent_rect.X + this.parent_rect.Width, this.parent_rect.Y + this.parent_rect.Height);
+            this.TopLeft.FullRefresh(caller.X, caller.Y);
+            this.TopRight.FullRefresh(caller.X + caller.Width, caller.Y);
+            this.BottomLeft.FullRefresh(caller.X, caller.Y + caller.Height);
+            this.BottomRight.FullRefresh(caller.X + caller.Width, caller.Y + caller.Height);
+        }
+
+        public void ImportData(Resizer other)
+        {
+            this.TopLeft.ImportData(other.TopLeft);
+            this.BottomRight.ImportData(other.BottomRight);
+            this.TopRight.ImportData(other.TopRight);
+            this.BottomLeft.ImportData(other.BottomLeft);
         }
     }
 }

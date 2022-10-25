@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UML_Editor_Nguyen.Relationship_Components.LineTypes
 {
-    public class Ln_Inheritance : ILineType
+    public class Ln_Inheritance : LineType
     {
         public override string TypeName { get; set; } = "Inheritance";
         public override void DrawLine(Graphics g, Pen p, int startX, int startY, int endX, int endY)

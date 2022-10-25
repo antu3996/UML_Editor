@@ -10,6 +10,8 @@ namespace UML_Editor_Nguyen.Components
 {
     public class Circle
     {
+        public int ID { get; set; }
+
         public int X { get; set; }
         public int Y { get; set; }
         public int Radius { get; set; }
@@ -89,6 +91,14 @@ namespace UML_Editor_Nguyen.Components
             this.Initial_Point = default;
             this.Drag_Point = default;
             this.IsSelected = false;
+        }
+
+        public void ImportData(Circle other)
+        {
+            this.ID = other.ID;
+            this.X = other.X;
+            this.Y = other.Y;
+            this.Radius = other.Radius;
         }
     }
 }

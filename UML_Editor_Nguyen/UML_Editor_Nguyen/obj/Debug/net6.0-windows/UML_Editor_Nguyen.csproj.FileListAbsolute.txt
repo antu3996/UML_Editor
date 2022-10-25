@@ -41,4 +41,4 @@ C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Form_Exporter.resources
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.Form_Initializer.resources
 C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\obj\Debug\net6.0-windows\UML_Editor_Nguyen.csproj.CopyComplete
-C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\System.Text.Json.dll
+C:\Users\sokol\Desktop\repos\UML_Editor_Nguyen\UML_Editor_Nguyen\bin\Debug\net6.0-windows\Newtonsoft.Json.dll

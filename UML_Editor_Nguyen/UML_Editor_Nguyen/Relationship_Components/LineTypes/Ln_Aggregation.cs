@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UML_Editor_Nguyen.Relationship_Components.LineTypes
 {
-    public class Ln_Aggregation : ILineType
+    public class Ln_Aggregation : LineType
     {
         public override string TypeName { get; set; } = "Aggregation";
         public override void DrawLine(Graphics g, Pen p, int startX, int startY, int endX, int endY)

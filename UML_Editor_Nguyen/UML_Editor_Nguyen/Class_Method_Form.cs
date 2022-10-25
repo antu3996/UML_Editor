@@ -29,14 +29,15 @@ namespace UML_Editor_Nguyen
             //this.grid_Parameters.DataSource = this.newParemeters;
             this.list_Parameters.DataSource = this.newParemeters;
             this.cb_ParamDataType.DataSource = new List<DataType>(DataTypeStorage.Instance.GetData());
+            this.cb_DataType.DataSource = DataTypeStorage.Instance.GetData();
 
-            if (newMethod.ReturnType == "void")
+            if (newMethod.IsVoid)
             {
                 this.chck_ReturnVoid.Checked = true;
             }
             else
             {
-                this.txt_ReturnType.Text = newMethod.ReturnType;
+                this.cb_DataType.SelectedItem = newMethod.ReturnType;
             }
 
             if (newMethod.Modifier == "public")
@@ -112,11 +113,12 @@ namespace UML_Editor_Nguyen
 
                 if (this.chck_ReturnVoid.Checked)
                 {
-                    this.newMethod.ReturnType = "void";
+                    this.newMethod.IsVoid = true;
                 }
                 else
                 {
-                    this.newMethod.ReturnType = this.txt_ReturnType.Text;
+                    this.newMethod.ReturnType = this.cb_DataType.SelectedItem as DataType;
+                    this.newMethod.IsVoid = false;
                 }
                 
                 if (this.rdb_private.Checked)
@@ -147,8 +149,7 @@ namespace UML_Editor_Nguyen
         {
             if (this.chck_ReturnVoid.Checked)
             {
-                this.errorProvider1.SetError(this.txt_ReturnType, null);
-                this.txt_ReturnType.Clear();
+                this.errorProvider1.SetError(this.cb_DataType, null);
             }
         }
 
@@ -168,7 +169,7 @@ namespace UML_Editor_Nguyen
                 && this.errorProvider1.GetError(this.cb_ParamDataType) == String.Empty)
                 {
                     this.newParemeters.Add(new Method_Parameter()
-                    { ParameterName = this.txt_ParameterName.Text, DataType = this.cb_ParamDataType.Text });
+                    { ParameterName = this.txt_ParameterName.Text, DataType = this.cb_ParamDataType.SelectedItem as DataType });
 
                     this.list_Parameters.DataSource = null;
                     this.list_Parameters.DataSource = this.newParemeters;
@@ -221,6 +222,23 @@ namespace UML_Editor_Nguyen
             if (this.cb_ParamDataType.SelectedIndex == -1)
             {
                 this.errorProvider1.SetError(this.cb_ParamDataType, "Pole nesmí být prázdné");
+
+                e.Cancel = true;
+            }
+        }
+
+        private void cb_DataType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            this.chck_ReturnVoid.Checked = false;
+        }
+
+        private void cb_DataType_Validating(object sender, CancelEventArgs e)
+        {
+            this.errorProvider1.SetError(this.cb_DataType, null);
+
+            if (!this.chck_ReturnVoid.Checked && this.cb_DataType.SelectedIndex == -1)
+            {
+                this.errorProvider1.SetError(this.cb_DataType, "Pole nesmí být prázdné");
 
                 e.Cancel = true;
             }

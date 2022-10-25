@@ -178,5 +178,18 @@ namespace UML_Editor_Nguyen
             }
             return false;
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chck_IsInterface.Checked)
+            {
+                this.txt_Stereotype.Text = "Interface";
+                this.txt_Stereotype.Enabled = false;
+            }
+            else
+            {
+                this.txt_Stereotype.Enabled = true;
+            }
+        }
     }
 }

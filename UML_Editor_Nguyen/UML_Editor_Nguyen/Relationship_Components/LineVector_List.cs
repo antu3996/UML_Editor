@@ -9,9 +9,9 @@ namespace UML_Editor_Nguyen.Relationship_Components
 {
     public class LineVector_List
     {
-        public LineVector_Node StartVector { get; set; }
-        public LineVector_Node MiddleVector { get; set; }
-        public LineVector_Node EndVector { get; set; }
+        public LineVector MiddleVector { get; set; }
+
+        public List<LineVector> Vectors { get; set; }
 
         public int VectorsCount { get; set; } = 0;
 
@@ -22,34 +22,55 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
         public void AddNewVector(LineVector vector)
         {
+            this.Vectors.Add(vector);
+            this.VectorsCount += 1;
 
-            this.EndVector = this.StartVector.AddAndGetLast(vector);
-
-            if (this.EndVector != this.StartVector)
-            {
-                this.VectorsCount += 1;
-                this.EndVector.Vector_Index = this.VectorsCount;
-
-                int middleIndex = this.VectorsCount / 2;
-                this.MiddleVector = this.MiddleVector.GetNextUntilIndex(middleIndex);
-            }
+            int middleIndex = this.VectorsCount / 2;
+            this.MiddleVector = this.Vectors[middleIndex];
 
             
         }
 
-        public void Draw(Graphics g, ILineType lineType)
+        public bool SelectVector(int mouseX, int mouseY)
         {
-            this.StartVector.Draw(g, lineType);
-            lineType.DrawArrow(g, this.EndVector.Current_Object.EndPoint.X, 
-                this.EndVector.Current_Object.EndPoint.Y, this.EndVector.Current_Object.Direction);
+            bool isWholeSelected = false;
+            foreach (LineVector item in this.Vectors)
+            {
+                if (item.SelectVector(mouseX, mouseY))
+                {
+                    isWholeSelected = true;
+                    break;
+                }
+            }
+
+            this.Vectors.ForEach(item => item.IsSelected = isWholeSelected);
+
+            return isWholeSelected;
+        }
+
+
+        public void Draw(Graphics g, LineType lineType)
+        {
+            foreach (LineVector item in this.Vectors)
+            {
+                item.Draw(g, lineType);
+            }
+
+            lineType.DrawArrow(g, this.Vectors.Last().EndPoint.X,
+               this.Vectors.Last().EndPoint.Y, this.Vectors.Last().Direction);
         }
 
         public void CreateNewVectors()
         {
-            this.StartVector = new LineVector_Node();
-            this.EndVector = this.StartVector;
-            this.StartVector.Vector_Index = this.VectorsCount;
-            this.MiddleVector = this.StartVector;
+            this.Vectors = new List<LineVector>();
+        }
+
+        public void ClearSelection()
+        {
+            foreach (LineVector item in this.Vectors)
+            {
+                item.ClearSelection();
+            }
         }
     }
 }

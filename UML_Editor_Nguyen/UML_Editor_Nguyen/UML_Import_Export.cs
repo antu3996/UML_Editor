@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace UML_Editor_Nguyen
 {
@@ -14,7 +14,18 @@ namespace UML_Editor_Nguyen
             if (File.Exists(filepath))
             {
                 string json = File.ReadAllText(filepath);
-                UML_Objects_Wrapper loaded = JsonSerializer.Deserialize<UML_Objects_Wrapper>(json);
+
+                JsonSerializer newDeserializer = new JsonSerializer();
+                newDeserializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+                UML_Objects_Wrapper loaded = null;
+
+                using (StreamReader reader = new StreamReader(filepath))
+                using (JsonReader jsonReader = new JsonTextReader(reader))
+                {
+                    loaded = newDeserializer.Deserialize<UML_Objects_Wrapper>(jsonReader);
+
+                }
                 return loaded;
 
             }
@@ -30,18 +41,31 @@ namespace UML_Editor_Nguyen
                 File.Delete(filepath);
             }
 
-            string json = JsonSerializer.Serialize(data);
+
 
             using (StreamWriter writer = new StreamWriter(filepath))
+            using(JsonTextWriter jsonWriter = new JsonTextWriter(writer))
             {
-                writer.Write(json);
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                jsonSerializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+                jsonSerializer.Serialize(jsonWriter, data);
 
                 writer.Close();
             }
         }
-        public static void ExportToPicture()
+        public static void ExportToPicture(PictureBox pictureBox, UML_Editor_Engine mainEngine, string filepath)
         {
 
+            Bitmap pic = new Bitmap(pictureBox.ClientSize.Width, pictureBox.ClientSize.Height);
+            using (Graphics g = Graphics.FromImage(pic))
+            {
+                g.FillRectangle(Brushes.White, 0, 0, pictureBox.ClientSize.Width, pictureBox.ClientSize.Height);
+                mainEngine.Draw(g);
+                pic.Save(filepath, System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
+
+        
     }
 }

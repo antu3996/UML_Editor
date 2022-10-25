@@ -33,7 +33,6 @@
             this.txt_MethodName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.chck_ReturnVoid = new System.Windows.Forms.CheckBox();
-            this.txt_ReturnType = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btn_Confirm = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cb_ParamDataType = new System.Windows.Forms.ComboBox();
+            this.cb_DataType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -92,14 +92,6 @@
             this.chck_ReturnVoid.Text = "Void";
             this.chck_ReturnVoid.UseVisualStyleBackColor = true;
             this.chck_ReturnVoid.CheckedChanged += new System.EventHandler(this.chck_ReturnVoid_CheckedChanged);
-            // 
-            // txt_ReturnType
-            // 
-            this.txt_ReturnType.Location = new System.Drawing.Point(104, 339);
-            this.txt_ReturnType.Name = "txt_ReturnType";
-            this.txt_ReturnType.Size = new System.Drawing.Size(274, 23);
-            this.txt_ReturnType.TabIndex = 5;
-            this.txt_ReturnType.Validating += new System.ComponentModel.CancelEventHandler(this.txt_ReturnType_Validating);
             // 
             // label3
             // 
@@ -248,12 +240,23 @@
             this.cb_ParamDataType.TabIndex = 28;
             this.cb_ParamDataType.Validating += new System.ComponentModel.CancelEventHandler(this.cb_ParamDataType_Validating);
             // 
+            // cb_DataType
+            // 
+            this.cb_DataType.FormattingEnabled = true;
+            this.cb_DataType.Location = new System.Drawing.Point(112, 339);
+            this.cb_DataType.Name = "cb_DataType";
+            this.cb_DataType.Size = new System.Drawing.Size(177, 23);
+            this.cb_DataType.TabIndex = 29;
+            this.cb_DataType.SelectedValueChanged += new System.EventHandler(this.cb_DataType_SelectedValueChanged);
+            this.cb_DataType.Validating += new System.ComponentModel.CancelEventHandler(this.cb_DataType_Validating);
+            // 
             // Class_Method_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(763, 500);
+            this.Controls.Add(this.cb_DataType);
             this.Controls.Add(this.cb_ParamDataType);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -265,7 +268,6 @@
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Confirm);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txt_ReturnType);
             this.Controls.Add(this.chck_ReturnVoid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_MethodName);
@@ -286,7 +288,6 @@
         private TextBox txt_MethodName;
         private Label label2;
         private CheckBox chck_ReturnVoid;
-        private TextBox txt_ReturnType;
         private Label label3;
         private Button btn_Confirm;
         private Button btn_Cancel;
@@ -302,5 +303,6 @@
         private Button btn_DeleteParameter;
         private ListBox list_Parameters;
         private ComboBox cb_ParamDataType;
+        private ComboBox cb_DataType;
     }
 }

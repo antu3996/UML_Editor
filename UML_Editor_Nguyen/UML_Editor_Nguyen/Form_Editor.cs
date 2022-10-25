@@ -15,13 +15,11 @@ namespace UML_Editor_Nguyen
             InitializeComponent();
 
             
+            this.engine = new UML_Editor_Engine();
+
             if (data != null)
             {
-                this.engine = data;
-            }
-            else
-            {
-                this.engine = new UML_Editor_Engine();
+                this.engine.ImportData(data);
             }
         }
 
@@ -125,14 +123,21 @@ namespace UML_Editor_Nguyen
 
         private void btn_Export_Click(object sender, EventArgs e)
         {
-            Form_Exporter export_form = new Form_Exporter(this.engine);
+            
+
+            Form_Exporter export_form = new Form_Exporter(this.editor_Box, this.engine);
 
             this.Hide();
             if (export_form.ShowDialog() == DialogResult.OK)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.Show();
             }
+        }
+
+        private void Form_Editor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+
         }
     }
 }

@@ -47,6 +47,7 @@ namespace UML_Editor_Nguyen
 
             foreach (UML_Relationship item in this.relationships)
             {
+                item.RefreshState();
                 item.Draw(g);
             }
         }
@@ -66,7 +67,7 @@ namespace UML_Editor_Nguyen
                         break;
                     }
                 }
-
+                newClass.ID = this.classes.Count;
                 this.classes.Add(newClass);
 
                 this.classes.Sort(new UML_ClassRect_Comparer());
@@ -84,12 +85,6 @@ namespace UML_Editor_Nguyen
                     {
                         this.selectedClass.MouseDrag(mouseX, mouseY);
                         this.CheckCollisions();
-                    }
-
-                    if (this.selectedRelationship != null)
-                    {
-                        this.selectedRelationship.MouseDrag(mouseX, mouseY);
-                        this.CheckCollisionsVector();
                     }
 
                 }
@@ -195,7 +190,7 @@ namespace UML_Editor_Nguyen
                 UML_Relationship current = this.relationships[i];
                 current.SelectVector(mouseX, mouseY);
 
-                if (current.selectedVector != null)
+                if (current.IsSelected)
                 {
                     newSelection = current;
                     break;
@@ -215,25 +210,6 @@ namespace UML_Editor_Nguyen
                 this.selectedRelationship = newSelection;
             }
 
-        }
-
-        public void CheckCollisionsVector()
-        {
-            for (int i = this.relationships.Count - 1; i >= 0; i--)
-            {
-                UML_Relationship current = this.relationships[i];
-                if (current.IsColliding(this.selectedRelationship.selectedVector))
-                {
-                    this.selectedRelationship.Layer_Index = current.Layer_Index + 1;
-                    break;
-                }
-                else
-                {
-                    this.selectedRelationship.Layer_Index = 1;
-                }
-            }
-
-            this.relationships.Sort(new UML_Relationship_Comparer());
         }
 
         private void MultiSelect(Form_Editor parent, int mouseX, int mouseY)
@@ -279,6 +255,7 @@ namespace UML_Editor_Nguyen
 
                                 if (newRelationship == null)
                                 {
+                                 
                                     this.relationships.Add(new UML_Relationship(this.firstSelection, this.secondSelection));
                                 }
 
@@ -296,6 +273,20 @@ namespace UML_Editor_Nguyen
             }
 
 
+        }
+
+        public void ClearSelection()
+        {
+            this.CheckboxChange(false);
+
+            if (this.selectedClass != null)
+            {
+                this.selectedClass.ClearSelection();
+            }
+            if (this.selectedRelationship != null)
+            {
+                this.selectedRelationship.ClearSelection();
+            }
         }
 
         public void MouseDoubleClick(Form_Editor parent)
@@ -375,5 +366,37 @@ namespace UML_Editor_Nguyen
                 }
             }
         }
+
+        public void ImportData(UML_Editor_Engine other)
+        {
+
+            for (int i = 0; i < other.classes.Count; i++)
+            {
+                UML_Class_Object newClass = new UML_Class_Object(0,0,0,0);
+                newClass.ImportData(other.classes[i]);
+
+                this.classes.Add(newClass);
+            }
+
+            for (int i = 0; i < other.relationships.Count; i++)
+            {
+                UML_Class_Object first = this.classes.Where(item => item.ID == other.relationships[i].Primary_Class.ID).FirstOrDefault();
+                UML_Class_Object second = this.classes.Where(item => item.ID == other.relationships[i].Secondary_Class.ID).FirstOrDefault();
+
+                UML_Relationship newRel = new UML_Relationship(first, second);
+
+                if (newRel.Primary_Class != null && newRel.Secondary_Class != null)
+                {
+                   
+                    newRel.ImportData(other.relationships[i]);
+
+                
+                    this.relationships.Add(newRel);
+                }
+            }
+
+
+            
+    }
     }
 }

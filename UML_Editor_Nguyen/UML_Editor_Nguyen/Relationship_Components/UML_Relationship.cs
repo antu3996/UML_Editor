@@ -13,14 +13,14 @@ namespace UML_Editor_Nguyen.Relationship_Components
     {
         public BindingCircle StartPoint { get; set; }
         public BindingCircle EndPoint { get; set; }
-        public LineVector_List Vectors { get; set; }
+        public LineVector_List VectorList { get; set; }
 
         public int Layer_Index { get; set; } = 1;
         
         public UML_Class_Object Primary_Class { get; set; }
         public UML_Class_Object Secondary_Class { get; set; }
 
-        public LineVector selectedVector { get; set; } = null;
+        public bool IsSelected { get; set; } = false;
 
 
         public UML_Relationship_Description Description_Component { get; set; }
@@ -32,42 +32,38 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
         public UML_Relationship(UML_Class_Object primary, UML_Class_Object secondary)
         {
+
             this.Primary_Class = primary;
             this.Secondary_Class = secondary;
-            this.Vectors = new LineVector_List();
 
-            
 
-            this.Primary_Class.Binder_Component.RefreshDependentRelationships += this.RefreshOrigin;
-            this.Secondary_Class.Binder_Component.RefreshDependentRelationships += this.RefreshOrigin;
+            this.VectorList = new LineVector_List();
 
 
             this.Description_Component = new UML_Relationship_Description(this);
 
-            this.VectorGen_Component = new RelationshipBoundGenerator(this);
+            this.VectorGen_Component = new RelationshipBoundGenerator();
 
-            this.VectorGen_Component.DidGeneratePoints();
+
+
+
         }
         public void Draw(Graphics g)
         {
-            this.Vectors.Draw(g, this.Description_Component.lineType);
+            this.VectorList.Draw(g, this.Description_Component.lineType);
             this.Description_Component.Draw(g);
         }
 
-        public void RefreshOrigin(UML_Relationship caller)
+        public void RefreshState()
         {
-
-            if (caller != this)
-            {
-                this.VectorGen_Component.DidGeneratePoints();
-            }
+            this.VectorGen_Component.GeneratePoints(this);
         }
 
 
 
         public void DoubleClick()
         {
-            if (this.selectedVector != null)
+            if (this.IsSelected)
             {
                 this.Description_Component.OpenForm();
             }
@@ -76,37 +72,20 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
         public void SelectVector(int mouseX, int mouseY)
         {
-            LineVector_Node selected = this.Vectors.StartVector.SelectVector(mouseX, mouseY);
-
-            if (selected != null)
+            if (this.VectorList.SelectVector(mouseX, mouseY))
             {
-                 this.selectedVector = selected.Current_Object;
+                this.IsSelected = true;
             }
             else
             {
-                this.selectedVector = null;
+                this.IsSelected = false;
             }
-        }
-
-        public bool IsColliding(LineVector vect)
-        {
-            return this.Vectors.StartVector.IsColliding(vect);
         }
 
         public void ClearSelection()
         {
-            this.Vectors.StartVector.ClearSelection();
-            this.selectedVector = null;
+            this.VectorList.ClearSelection();
         }
-        
-        public void MouseDrag(int mouseX, int mouseY)
-        {
-            if (this.selectedVector != null)
-            {
-                this.Vectors.StartVector.MouseDrag(mouseX, mouseY);
-            }
-        }
-
         public void CopyFromOther(UML_Relationship otherRel)
         {
             this.Description_Component = otherRel.Description_Component;
@@ -116,10 +95,10 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
         public void Delete()
         {
-            if (this.selectedVector != null)
+            if (this.IsSelected)
             {
-                this.Primary_Class.Binder_Component.RemoveBindingCircleFromSide(this, this.CurrentPrimarySide, this.StartPoint);
-                this.Secondary_Class.Binder_Component.RemoveBindingCircleFromSide(this, this.CurrentSecondarySide, this.EndPoint);
+                this.Primary_Class.Binder_Component.RemoveBindingCircleFromSide(this.Primary_Class, this.CurrentPrimarySide, this.StartPoint);
+                this.Secondary_Class.Binder_Component.RemoveBindingCircleFromSide(this.Secondary_Class, this.CurrentSecondarySide, this.EndPoint);
             }
         }
 
@@ -134,6 +113,25 @@ namespace UML_Editor_Nguyen.Relationship_Components
             {
                 return false;
             }
+        }
+
+        public void ImportData(UML_Relationship other)
+        {
+
+            this.CurrentPrimarySide = other.CurrentPrimarySide;
+            this.CurrentSecondarySide = other.CurrentSecondarySide;
+            this.Layer_Index = other.Layer_Index;
+
+            this.Description_Component.ImportData(other.Description_Component);
+
+            this.StartPoint = this.Primary_Class.Binder_Component.GetCircleById(other.StartPoint.ID,
+                this.CurrentPrimarySide);
+            this.EndPoint = this.Secondary_Class.Binder_Component.GetCircleById(other.EndPoint.ID,
+                this.CurrentSecondarySide);
+            this.VectorGen_Component.GeneratePoints(this);
+
+
+
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Relationship));
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
@@ -45,8 +46,10 @@
             this.ch_Inhe = new System.Windows.Forms.RadioButton();
             this.ch_Association = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Save
@@ -84,6 +87,7 @@
             this.txt_Multiplicity_Sec.Name = "txt_Multiplicity_Sec";
             this.txt_Multiplicity_Sec.Size = new System.Drawing.Size(49, 23);
             this.txt_Multiplicity_Sec.TabIndex = 28;
+            this.txt_Multiplicity_Sec.Validating += new System.ComponentModel.CancelEventHandler(this.txt_Multiplicity_Sec_Validating);
             // 
             // txt_Multiplicity_Prim
             // 
@@ -91,6 +95,7 @@
             this.txt_Multiplicity_Prim.Name = "txt_Multiplicity_Prim";
             this.txt_Multiplicity_Prim.Size = new System.Drawing.Size(49, 23);
             this.txt_Multiplicity_Prim.TabIndex = 27;
+            this.txt_Multiplicity_Prim.Validating += new System.ComponentModel.CancelEventHandler(this.txt_Multiplicity_Prim_Validating);
             // 
             // label2
             // 
@@ -117,6 +122,7 @@
             this.txt_RelStereotype.Name = "txt_RelStereotype";
             this.txt_RelStereotype.Size = new System.Drawing.Size(240, 23);
             this.txt_RelStereotype.TabIndex = 17;
+            this.txt_RelStereotype.Validating += new System.ComponentModel.CancelEventHandler(this.txt_RelStereotype_Validating);
             // 
             // label1
             // 
@@ -132,7 +138,7 @@
             this.ch_Comp.AutoSize = true;
             this.ch_Comp.Location = new System.Drawing.Point(6, 147);
             this.ch_Comp.Name = "ch_Comp";
-            this.ch_Comp.Size = new System.Drawing.Size(95, 19);
+            this.ch_Comp.Size = new System.Drawing.Size(94, 19);
             this.ch_Comp.TabIndex = 23;
             this.ch_Comp.Text = "Composition";
             this.ch_Comp.UseVisualStyleBackColor = true;
@@ -142,7 +148,7 @@
             this.ch_Aggre.AutoSize = true;
             this.ch_Aggre.Location = new System.Drawing.Point(6, 122);
             this.ch_Aggre.Name = "ch_Aggre";
-            this.ch_Aggre.Size = new System.Drawing.Size(92, 19);
+            this.ch_Aggre.Size = new System.Drawing.Size(91, 19);
             this.ch_Aggre.TabIndex = 22;
             this.ch_Aggre.Text = "Aggregation";
             this.ch_Aggre.UseVisualStyleBackColor = true;
@@ -152,7 +158,7 @@
             this.ch_Dep.AutoSize = true;
             this.ch_Dep.Location = new System.Drawing.Point(6, 97);
             this.ch_Dep.Name = "ch_Dep";
-            this.ch_Dep.Size = new System.Drawing.Size(92, 19);
+            this.ch_Dep.Size = new System.Drawing.Size(91, 19);
             this.ch_Dep.TabIndex = 21;
             this.ch_Dep.Text = "Dependency";
             this.ch_Dep.UseVisualStyleBackColor = true;
@@ -162,7 +168,7 @@
             this.ch_Real.AutoSize = true;
             this.ch_Real.Location = new System.Drawing.Point(6, 72);
             this.ch_Real.Name = "ch_Real";
-            this.ch_Real.Size = new System.Drawing.Size(83, 19);
+            this.ch_Real.Size = new System.Drawing.Size(82, 19);
             this.ch_Real.TabIndex = 20;
             this.ch_Real.Text = "Realization";
             this.ch_Real.UseVisualStyleBackColor = true;
@@ -172,7 +178,7 @@
             this.ch_Inhe.AutoSize = true;
             this.ch_Inhe.Location = new System.Drawing.Point(6, 47);
             this.ch_Inhe.Name = "ch_Inhe";
-            this.ch_Inhe.Size = new System.Drawing.Size(85, 19);
+            this.ch_Inhe.Size = new System.Drawing.Size(84, 19);
             this.ch_Inhe.TabIndex = 19;
             this.ch_Inhe.Text = "Inheritance";
             this.ch_Inhe.UseVisualStyleBackColor = true;
@@ -182,7 +188,7 @@
             this.ch_Association.AutoSize = true;
             this.ch_Association.Location = new System.Drawing.Point(6, 22);
             this.ch_Association.Name = "ch_Association";
-            this.ch_Association.Size = new System.Drawing.Size(87, 19);
+            this.ch_Association.Size = new System.Drawing.Size(86, 19);
             this.ch_Association.TabIndex = 18;
             this.ch_Association.Text = "Association";
             this.ch_Association.UseVisualStyleBackColor = true;
@@ -202,10 +208,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Typ vazby:";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Form_Relationship
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(430, 353);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_Save);
@@ -222,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,5 +258,6 @@
         private RadioButton ch_Inhe;
         private RadioButton ch_Association;
         private GroupBox groupBox1;
+        private ErrorProvider errorProvider1;
     }
 }

@@ -37,12 +37,14 @@ namespace UML_Editor_Nguyen.Relationship_Components
             this.SetImaginaryArea();
         }
 
-        public void Draw(Graphics g, ILineType lineType)
+        public void Draw(Graphics g, LineType lineType)
         {
             Pen p = new Pen(Color.Black, 2);
 
             if (this.IsSelected)
+            {
                 p.Color = Color.Yellow;
+            }
 
             /*g.DrawLine(p, this.StartPoint, this.EndPoint);*/
 

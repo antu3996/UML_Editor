@@ -12,12 +12,13 @@ namespace UML_Editor_Nguyen.Relationship_Components
         public string Stereotype { get; set; }
         public string Multiplicity1 { get; set; }
         public string Multiplicity2 { get; set; }
-        public ILineType lineType { get; set; } = new Ln_Association();
+        public LineType lineType { get; set; } = new Ln_Association();
 
         public UML_Relationship parent_rel { get; set; }
         public UML_Relationship_Description(UML_Relationship parent_rel)
         {
             this.parent_rel = parent_rel;
+
         }
 
         public void Draw(Graphics g)
@@ -26,8 +27,8 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
             
 
-            int startDirection = parent_rel.Vectors.StartVector.Current_Object.Direction;
-            int endDirection = parent_rel.Vectors.EndVector.Current_Object.Direction;
+            int startDirection = parent_rel.VectorList.Vectors[0].Direction;
+            int endDirection = parent_rel.VectorList.Vectors.Last().Direction;
 
             if (startDirection == 1)
             {
@@ -82,7 +83,7 @@ namespace UML_Editor_Nguyen.Relationship_Components
 
             if (!string.IsNullOrEmpty(this.Stereotype))
             {
-                this.parent_rel.Vectors.MiddleVector.Current_Object.DrawStringAroundVector(g, $"<<{this.Stereotype}>>");
+                this.parent_rel.VectorList.MiddleVector.DrawStringAroundVector(g, $"<<{this.Stereotype}>>");
             }
         }
 
@@ -90,6 +91,39 @@ namespace UML_Editor_Nguyen.Relationship_Components
         {
             Form_Relationship frm = new Form_Relationship(this);
             frm.ShowDialog();
+        }
+
+        public void ImportData(UML_Relationship_Description other) 
+        {
+            this.Stereotype = other.Stereotype;
+            this.Multiplicity1 = other.Multiplicity1;
+            this.Multiplicity2 = other.Multiplicity2;
+            
+            if (other.lineType.TypeName == "Association")
+            {
+                this.lineType = new Ln_Association();
+            }
+            if (other.lineType.TypeName == "Aggregation")
+            {
+                this.lineType = new Ln_Aggregation();
+            }
+            if (other.lineType.TypeName == "Composition")
+            {
+                this.lineType = new Ln_Composition();
+            }
+            if (other.lineType.TypeName == "Dependency")
+            {
+                this.lineType = new Ln_Dependency();
+            }
+            if (other.lineType.TypeName == "Inheritance")
+            {
+                this.lineType = new Ln_Inheritance();
+            }
+            if (other.lineType.TypeName == "Realization")
+            {
+                this.lineType = new Ln_Realization();
+            }
+
         }
     }
 }

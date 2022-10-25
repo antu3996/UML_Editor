@@ -193,5 +193,24 @@ namespace UML_Editor_Nguyen
             
         }
 
+        public void ImportData(UML_Class_Description other)
+        {
+            this.ClassName = other.ClassName;
+            this.Stereotype = other.Stereotype;
+
+            for (int i = 0; i < other.Properties.Count; i++)
+            {
+                Class_Property newProp = new Class_Property();
+                newProp.ImportData(other.Properties[i]);
+                this.Properties.Add(newProp);
+            }
+            for (int i = 0; i < other.Methods.Count; i++)
+            {
+                Class_Method newMeth = new Class_Method();
+                newMeth.ImportData(other.Methods[i]);
+                this.Methods.Add(newMeth);
+            }
+        }
+
     }
 }

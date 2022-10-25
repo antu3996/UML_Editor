@@ -10,7 +10,7 @@ using UML_Editor_Nguyen.Relationship_Components.LineTypes;
 namespace UML_Editor_Nguyen.Relationship_Components
 {
     public class LineVector_Node
-    {
+    {/*
         public LineVector_Node Previous { get; set; }
         public LineVector_Node Next { get; set; }
 
@@ -41,7 +41,7 @@ namespace UML_Editor_Nguyen.Relationship_Components
             }
         }
 
-        public void Draw(Graphics g, ILineType lineType)
+        public void Draw(Graphics g, LineType lineType)
         {
             if (this.Current_Object != null)
             {
@@ -170,6 +170,6 @@ namespace UML_Editor_Nguyen.Relationship_Components
             {
                 this.Next.ClearSelection();
             }
-        }
+        }*/
     }
 }
